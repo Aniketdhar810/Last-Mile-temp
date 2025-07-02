@@ -73,7 +73,7 @@ def main():
     print(f"- Driver routes: {results['summary']['driver_routes']}")
     print(f"- Total customers served: {results['summary']['total_customers']}")
     print(f"- Total weight delivered: {results['summary']['total_weight']:.1f}kg")
-    print(f"- Efficiency score: {results['summary']['efficiency_score']:.2f} customers/vehicle")
+    print(f"- Efficiency score: {results['summary']['efficiency_score']:.2f}")
 
 if __name__ == "__main__":
     main()

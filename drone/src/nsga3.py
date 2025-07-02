@@ -230,6 +230,7 @@ class Nsga3Algo:
             return
 
         # Driver distance matrix using Google Routes API
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
         if self.use_real_time_data and api_key:
             try:
                 print("🗺️ Fetching real-time distance data from Google Routes API...")

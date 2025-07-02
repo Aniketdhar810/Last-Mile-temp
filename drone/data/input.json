@@ -1,4 +1,3 @@
-
 {
   "warehouse": {
     "coord": [32.7767, -96.7970],
@@ -173,58 +172,4 @@
     "temperature": 22
   },
   "num_customers": 15
-}
-{
-  "warehouse": {
-    "coord": [32.7767, -96.797],
-    "max_drones": 5,
-    "max_trucks": 3
-  },
-  "num_customers": 14,
-  "drones": [
-    {
-      "id": "drone_1",
-      "model": "DJI M300",
-      "payload_capacity": 3.0,
-      "battery_capacity": 5000,
-      "consumption_per_km_per_kg": 0.15,
-      "takeoff_consumption": 200,
-      "weight": 6.3,
-      "speed": 50,
-      "max_range": 30,
-      "status": "available"
-    }
-  ],
-  "drivers": [
-    {
-      "id": "driver_1",
-      "name": "John Doe",
-      "vehicle": "van",
-      "max_capacity": 20.0,
-      "fuel_consumption": 0.12,
-      "status": "available"
-    }
-  ],
-  "customers": {
-    "customer_1": {"coord": [32.7851, -96.8067], "priority": "emergency", "weight": 1.5},
-    "customer_2": {"coord": [32.7668, -96.8028], "priority": "prime", "weight": 2.1},
-    "customer_3": {"coord": [32.7934, -96.7665], "priority": "normal", "weight": 0.8},
-    "customer_4": {"coord": [32.7489, -96.8194], "priority": "normal", "weight": 3.2},
-    "customer_5": {"coord": [32.8021, -96.7512], "priority": "prime", "weight": 1.9},
-    "customer_6": {"coord": [32.7423, -96.7856], "priority": "normal", "weight": 2.7},
-    "customer_7": {"coord": [32.8156, -96.7891], "priority": "emergency", "weight": 1.2},
-    "customer_8": {"coord": [32.7612, -96.7434], "priority": "normal", "weight": 4.1},
-    "customer_9": {"coord": [32.7289, -96.8321], "priority": "prime", "weight": 1.6},
-    "customer_10": {"coord": [32.8234, -96.7698], "priority": "normal", "weight": 2.9},
-    "customer_11": {"coord": [32.7756, -96.8156], "priority": "normal", "weight": 1.4},
-    "customer_12": {"coord": [32.7845, -96.7389], "priority": "emergency", "weight": 0.9},
-    "customer_13": {"coord": [32.7367, -96.7923], "priority": "prime", "weight": 2.3},
-    "customer_14": {"coord": [32.8098, -96.8045], "priority": "normal", "weight": 1.7}
-  },
-  "weather": {
-    "wind_speed": 8.5,
-    "visibility": 8000,
-    "precipitation": 0.2,
-    "temperature": 22
-  }
 }

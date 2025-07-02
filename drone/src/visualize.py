@@ -344,6 +344,72 @@ def save_optimization_results(routes, instance, filename):
         'routes': [],
         'summary': {
             'total_vehicles': len(routes),
+            'drone_routes': len([r for r in routes if r[0] == 'drone']),
+            'driver_routes': len([r for r in routes if r[0] == 'driver']),
+            'total_customers': sum(len(route) for _, route in routes),
+            'total_weight': sum(sum(instance['customers'][f'customer_{c}'].weight for c in route) for _, route in routes),
+            'efficiency_score': 0.0
+        }
+    }
+    
+    # Process each route
+    for i, (vehicle_type, route) in enumerate(routes):
+        if vehicle_type == 'drone':
+            # Direct line coordinates for drones
+            route_coordinates = [instance['warehouse'].coord]
+            for customer_idx in route:
+                customer = instance['customers'][f'customer_{customer_idx}']
+                route_coordinates.append([customer.lat, customer.lon])
+            route_coordinates.append(instance['warehouse'].coord)
+        else:
+            # Road-based coordinates for drivers
+            # Use the local function instead
+            route_coordinates = get_road_route_coordinates_for_save(instance, route)
+
+        route_data = {
+            'vehicle_id': f"{vehicle_type}_{i+1}",
+            'vehicle_type': vehicle_type,
+            'customers': route,
+            'coordinates': route_coordinates,
+            'total_weight': sum(instance['customers'][f'customer_{c}'].weight for c in route),
+            'total_distance': calculate_route_distance(route_coordinates)
+        }
+        results['routes'].append(route_data)
+    
+    # Calculate efficiency score
+    total_distance = sum(r['total_distance'] for r in results['routes'])
+    results['summary']['efficiency_score'] = max(0, 100 - (total_distance * 2 + len(routes) * 10))
+    
+    # Save to file
+    with open(filename, 'w') as f:
+        json.dump(results, f, indent=2)
+    
+    return results
+
+def get_road_route_coordinates_for_save(instance, route):
+    """Get simplified road coordinates for saving"""
+    coords = [instance['warehouse'].coord]
+    for customer_idx in route:
+        customer = instance['customers'][f'customer_{customer_idx}']
+        coords.append([customer.lat, customer.lon])
+    coords.append(instance['warehouse'].coord)
+    return coords
+
+def calculate_route_distance(coordinates):
+    """Calculate total distance for a route"""
+    total_distance = 0
+    for i in range(len(coordinates) - 1):
+        lat1, lon1 = coordinates[i]
+        lat2, lon2 = coordinates[i + 1]
+        # Simple Haversine distance calculation
+        import math
+        R = 6371
+        dlat = math.radians(lat2 - lat1)
+        dlon = math.radians(lon2 - lon1)
+        a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+        c = 2 * math.asin(math.sqrt(a))
+        total_distance += R * c
+    return total_distancecles': len(routes),
             'drone_routes': sum(1 for r in routes if r[0] == 'drone'),
             'driver_routes': sum(1 for r in routes if r[0] == 'driver'),
             'total_customers': sum(len(r[1]) for r in routes),
