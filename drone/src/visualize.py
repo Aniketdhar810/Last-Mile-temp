@@ -309,16 +309,16 @@ def plot_optimization(results_data, animate=False):
 def export_geojson(routes, instance):
     """Export routes to GeoJSON format for visualization"""
     features = []
-    
+
     for idx, (vehicle_type, route) in enumerate(routes):
         coords = [instance['warehouse'].coord]
-        
+
         for customer_idx in route:
             customer = instance['customers'][f'customer_{customer_idx}']
             coords.append([customer.lat, customer.lon])
-        
+
         coords.append(instance['warehouse'].coord)
-        
+
         features.append({
             "type": "Feature",
             "properties": {
@@ -332,7 +332,7 @@ def export_geojson(routes, instance):
                 "coordinates": coords
             }
         })
-    
+
     return {
         "type": "FeatureCollection",
         "features": features,
@@ -355,7 +355,7 @@ def save_optimization_results(routes, instance, filename):
             'efficiency_score': 0.0
         }
     }
-    
+
     # Process each route
     for i, (vehicle_type, route) in enumerate(routes):
         if vehicle_type == 'drone':
@@ -379,15 +379,15 @@ def save_optimization_results(routes, instance, filename):
             'total_distance': calculate_route_distance(route_coordinates)
         }
         results['routes'].append(route_data)
-    
+
     # Calculate efficiency score
     total_distance = sum(r['total_distance'] for r in results['routes'])
     results['summary']['efficiency_score'] = max(0, 100 - (total_distance * 2 + len(routes) * 10))
-    
+
     # Save to file
     with open(filename, 'w') as f:
         json.dump(results, f, indent=2)
-    
+
     return results
 
 def get_road_route_coordinates_for_save(instance, route):
@@ -469,13 +469,13 @@ def get_road_route_coordinates_for_save(instance, route):
     try:
         import requests
         import os
-        
+
         # Get API key
         api_key = os.getenv('GOOGLE_MAPS_API_KEY')
         if not api_key:
             # Try hardcoded key as fallback
             api_key = "AIzaSyD3zTC_gFdyFK5bD6GebwUQiRox7G8SDso"
-        
+
         if not api_key:
             # Fallback to direct coordinates if no API key
             coords = [instance['warehouse'].coord]
@@ -484,18 +484,18 @@ def get_road_route_coordinates_for_save(instance, route):
                 coords.append([customer.lat, customer.lon])
             coords.append(instance['warehouse'].coord)
             return coords
-        
+
         # Create waypoints for the route
         waypoints = []
         for customer_idx in route:
             customer = instance['customers'][f'customer_{customer_idx}']
             waypoints.append({"location": {"latLng": {"latitude": customer.lat, "longitude": customer.lon}}})
-        
+
         # Get directions from warehouse through all customers and back
         if len(waypoints) > 0:
             origin = {"location": {"latLng": {"latitude": instance['warehouse'].coord[0], "longitude": instance['warehouse'].coord[1]}}}
             destination = {"location": {"latLng": {"latitude": instance['warehouse'].coord[0], "longitude": instance['warehouse'].coord[1]}}}
-            
+
             # Prepare the request for Routes API
             request_body = {
                 "origin": origin,
@@ -511,14 +511,14 @@ def get_road_route_coordinates_for_save(instance, route):
                 "languageCode": "en-US",
                 "units": "METRIC"
             }
-            
+
             # Add intermediate waypoints if more than one customer
             if len(waypoints) > 1:
                 request_body["intermediates"] = waypoints
             elif len(waypoints) == 1:
                 # For single customer, make it the destination
                 request_body["destination"] = waypoints[0]
-            
+
             # Call Routes API
             url = f"https://routes.googleapis.com/directions/v2:computeRoutes"
             headers = {
@@ -526,15 +526,15 @@ def get_road_route_coordinates_for_save(instance, route):
                 "X-Goog-Api-Key": api_key,
                 "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline"
             }
-            
+
             response = requests.post(url, json=request_body, headers=headers)
-            
+
             if response.status_code == 200:
                 result = response.json()
                 if result.get('routes'):
                     encoded_polyline = result['routes'][0]['polyline']['encodedPolyline']
                     coords = decode_polyline_for_save(encoded_polyline)
-                    
+
                     # For single customer, add return trip
                     if len(waypoints) == 1:
                         return_request = {
@@ -543,7 +543,7 @@ def get_road_route_coordinates_for_save(instance, route):
                             "travelMode": "DRIVE",
                             "routingPreference": "TRAFFIC_AWARE_OPTIMAL"
                         }
-                        
+
                         return_response = requests.post(url, json=return_request, headers=headers)
                         if return_response.status_code == 200:
                             return_result = return_response.json()
@@ -551,7 +551,7 @@ def get_road_route_coordinates_for_save(instance, route):
                                 return_polyline = return_result['routes'][0]['polyline']['encodedPolyline']
                                 return_coords = decode_polyline_for_save(return_polyline)
                                 coords.extend(return_coords[1:])  # Skip first point to avoid duplication
-                    
+
                     return coords
                 else:
                     raise Exception("No routes found in API response")
@@ -559,7 +559,7 @@ def get_road_route_coordinates_for_save(instance, route):
                 raise Exception(f"Routes API returned status code: {response.status_code}, response: {response.text}")
         else:
             return [instance['warehouse'].coord, instance['warehouse'].coord]
-            
+
     except Exception as e:
         print(f"Warning: Failed to get road route coordinates using Routes API: {e}")
         print("Falling back to direct coordinates for driver route")
@@ -578,7 +578,7 @@ def decode_polyline_for_save(polyline_str):
     index = 0
     lat = 0
     lng = 0
-    
+
     while index < len(polyline_str):
         # Decode latitude
         shift = 0
@@ -590,10 +590,10 @@ def decode_polyline_for_save(polyline_str):
             shift += 5
             if byte < 0x20:
                 break
-        
+
         dlat = ~(result >> 1) if result & 1 else result >> 1
         lat += dlat
-        
+
         # Decode longitude
         shift = 0
         result = 0
@@ -604,10 +604,10 @@ def decode_polyline_for_save(polyline_str):
             shift += 5
             if byte < 0x20:
                 break
-        
+
         dlng = ~(result >> 1) if result & 1 else result >> 1
         lng += dlng
-        
+
         coords.append([lat / 1e5, lng / 1e5])
-    
+
     return coords
