@@ -1,0 +1,176 @@
+
+{
+  "warehouse": {
+    "coord": [32.7767, -96.7970],
+    "max_drones": 8,
+    "max_trucks": 5
+  },
+  "drones": [
+    {
+      "id": 1,
+      "model": "DJI M300",
+      "payload_capacity": 2.7,
+      "battery_capacity": 5935,
+      "consumption_per_km_per_kg": 15.2,
+      "takeoff_consumption": 850,
+      "weight": 6.3,
+      "speed": 23,
+      "max_range": 15,
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "model": "Wing Delivery",
+      "payload_capacity": 1.5,
+      "battery_capacity": 3200,
+      "consumption_per_km_per_kg": 12.8,
+      "takeoff_consumption": 650,
+      "weight": 4.8,
+      "speed": 18,
+      "max_range": 12,
+      "status": "available"
+    },
+    {
+      "id": 3,
+      "model": "Amazon Prime Air",
+      "payload_capacity": 2.3,
+      "battery_capacity": 4500,
+      "consumption_per_km_per_kg": 14.0,
+      "takeoff_consumption": 750,
+      "weight": 5.5,
+      "speed": 20,
+      "max_range": 18,
+      "status": "available"
+    },
+    {
+      "id": 4,
+      "model": "Zipline Platform",
+      "payload_capacity": 1.8,
+      "battery_capacity": 3800,
+      "consumption_per_km_per_kg": 13.5,
+      "takeoff_consumption": 700,
+      "weight": 4.2,
+      "speed": 25,
+      "max_range": 20,
+      "status": "available"
+    }
+  ],
+  "drivers": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "vehicle": "Ford Transit",
+      "max_capacity": 1400,
+      "fuel_consumption": 0.12,
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "name": "Sarah Johnson",
+      "vehicle": "Mercedes Sprinter",
+      "max_capacity": 1200,
+      "fuel_consumption": 0.10,
+      "status": "available"
+    },
+    {
+      "id": 3,
+      "name": "Mike Davis",
+      "vehicle": "Toyota Hiace",
+      "max_capacity": 900,
+      "fuel_consumption": 0.08,
+      "status": "available"
+    },
+    {
+      "id": 4,
+      "name": "Lisa Chen",
+      "vehicle": "Nissan NV200",
+      "max_capacity": 800,
+      "fuel_consumption": 0.09,
+      "status": "available"
+    }
+  ],
+  "customers": {
+    "customer_1": {
+      "coord": [32.7851, -96.8067],
+      "priority": "normal",
+      "weight": 2.1
+    },
+    "customer_2": {
+      "coord": [32.7505, -96.8309],
+      "priority": "emergency",
+      "weight": 0.8
+    },
+    "customer_3": {
+      "coord": [32.8129, -96.7684],
+      "priority": "prime",
+      "weight": 1.5
+    },
+    "customer_4": {
+      "coord": [32.7473, -96.7484],
+      "priority": "normal",
+      "weight": 3.2
+    },
+    "customer_5": {
+      "coord": [32.8098, -96.8344],
+      "priority": "prime",
+      "weight": 1.0
+    },
+    "customer_6": {
+      "coord": [32.7615, -96.7690],
+      "priority": "normal",
+      "weight": 2.5
+    },
+    "customer_7": {
+      "coord": [32.7890, -96.8156],
+      "priority": "emergency",
+      "weight": 0.9
+    },
+    "customer_8": {
+      "coord": [32.7320, -96.8020],
+      "priority": "prime",
+      "weight": 1.8
+    },
+    "customer_9": {
+      "coord": [32.8045, -96.7445],
+      "priority": "normal",
+      "weight": 2.8
+    },
+    "customer_10": {
+      "coord": [32.7680, -96.8290],
+      "priority": "prime",
+      "weight": 1.2
+    },
+    "customer_11": {
+      "coord": [32.7925, -96.7820],
+      "priority": "normal",
+      "weight": 3.5
+    },
+    "customer_12": {
+      "coord": [32.7550, -96.7560],
+      "priority": "emergency",
+      "weight": 0.6
+    },
+    "customer_13": {
+      "coord": [32.8150, -96.8100],
+      "priority": "normal",
+      "weight": 2.0
+    },
+    "customer_14": {
+      "coord": [32.7400, -96.7750],
+      "priority": "prime",
+      "weight": 1.4
+    },
+    "customer_15": {
+      "coord": [32.8000, -96.7600],
+      "priority": "normal",
+      "weight": 2.7
+    }
+  },
+  "weather": {
+    "wind_speed": 8.5,
+    "visibility": 10000,
+    "precipitation": 0,
+    "temperature": 22
+  },
+  "num_customers": 15
+}
