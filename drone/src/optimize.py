@@ -19,11 +19,7 @@ def main():
         print("🌐 Using real-time Google Maps API data")
     else:
         print("⚠️ Using simulated distance data (API disabled or failed)")
-        print("💡 To enable real APIs:")
-        print("   1. Get a Google Maps API key from Google Cloud Console")
-        print("   2. Enable these APIs: Geocoding, Distance Matrix, Routes")
-        print("   3. Add your API key to .env file: GOOGLE_MAPS_API_KEY=your_key")
-        print("   4. Set ENABLE_REAL_TIME_DATA=true in .env file")
+        print("💡 To enable real APIs: Set ENABLE_REAL_TIME_DATA=true in .env file")
 
     print(f"Loaded configuration:")
     print(f"- Warehouse: {optimizer.warehouse.coord}")

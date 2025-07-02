@@ -95,38 +95,25 @@ class Nsga3Algo:
                                             'true').lower() == 'true'
 
         # Try to use environment variable first, then fallback to hardcoded key
-        api_key = os.getenv('GOOGLE_MAPS_API_KEY')
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
 
         if self.use_real_time_data and api_key and api_key != "your_google_maps_api_key_here":
             try:
-                # Test with a simple HTTP request to avoid googlemaps library issues
-                test_url = f"https://maps.googleapis.com/maps/api/geocode/json?address=Dallas,TX&key={api_key}"
-                response = requests.get(test_url)
-                
-                if response.status_code == 200:
-                    result = response.json()
-                    if result.get('status') == 'OK':
-                        self.gmaps_client = googlemaps.Client(key=api_key)
-                        print("✅ Google Maps API initialized and tested - Using real-time data")
-                        print(f"📍 API Key configured: {api_key[:10]}...{api_key[-4:]}")
-                    else:
-                        raise Exception(f"API test failed: {result.get('status', 'Unknown error')}")
+                self.gmaps_client = googlemaps.Client(key=api_key)
+                # Test the API with a simple request
+                test_result = self.gmaps_client.geocode("Dallas, TX")
+                if test_result:
+                    print("✅ Google Maps API initialized and tested - Using real-time data")
+                    print(f"📍 API Key: {api_key[:10]}...{api_key[-4:]}")
                 else:
-                    raise Exception(f"HTTP {response.status_code}: {response.text}")
+                    raise Exception("API test failed")
             except Exception as e:
                 print(f"⚠️ Google Maps API failed to initialize: {e}")
                 print("📍 Falling back to simulated distances")
-                print("💡 Make sure your API key has the following APIs enabled:")
-                print("   - Geocoding API")
-                print("   - Routes API")
-                print("   - Distance Matrix API")
                 self.use_real_time_data = False
         else:
             print("📍 Using simulated distances (API not configured or disabled)")
-            print("💡 To enable real APIs:")
-            print("   1. Set GOOGLE_MAPS_API_KEY in .env file")
-            print("   2. Set ENABLE_REAL_TIME_DATA=true in .env file")
-            print("   3. Enable required APIs in Google Cloud Console")
+            print("💡 To enable: Add valid GOOGLE_MAPS_API_KEY to .env file")
             self.use_real_time_data = False
 
         self.warehouse = self.instance['warehouse']
@@ -248,59 +235,90 @@ class Nsga3Algo:
             print(f"✅ Loaded cached matrices for {n} locations")
             return
 
-        # Driver distance matrix using Google Distance Matrix API (simpler and more reliable)
-        api_key = os.getenv('GOOGLE_MAPS_API_KEY')
-        if self.use_real_time_data and api_key and self.gmaps_client:
+        # Driver distance matrix using Google Routes API
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
+        if self.use_real_time_data and api_key:
             try:
-                print("🗺️ Fetching real-time distance data from Google Distance Matrix API...")
+                print("🗺️ Fetching real-time distance data from Google Routes API...")
 
-                # Convert locations to strings for API
-                origin_coords = [f"{lat},{lon}" for lat, lon in locations]
-                
-                # Use googlemaps library for Distance Matrix API (more reliable)
-                matrix_result = self.gmaps_client.distance_matrix(
-                    origins=origin_coords,
-                    destinations=origin_coords,
-                    mode="driving",
-                    units="metric",
-                    avoid="tolls"
-                )
+                self.driver_distance_matrix = np.zeros((n, n))
+                self.driver_time_matrix = np.zeros((n, n))
 
-                if matrix_result['status'] == 'OK':
-                    self.driver_distance_matrix = np.zeros((n, n))
-                    self.driver_time_matrix = np.zeros((n, n))
-                    
-                    success_count = 0
-                    for i, row in enumerate(matrix_result['rows']):
-                        for j, element in enumerate(row['elements']):
-                            if element['status'] == 'OK':
-                                distance_km = element['distance']['value'] / 1000.0
-                                time_min = element['duration']['value'] / 60.0
-                                
-                                self.driver_distance_matrix[i][j] = distance_km
-                                self.driver_time_matrix[i][j] = time_min
-                                success_count += 1
-                            else:
-                                # Fallback to Haversine distance
+                success_count = 0
+
+                # Use Routes API for distance matrix calculation
+                for i in range(n):
+                    for j in range(n):
+                        if i != j:
+                            try:
+                                origin = {"location": {"latLng": {"latitude": locations[i][0], "longitude": locations[i][1]}}}
+                                destination = {"location": {"latLng": {"latitude": locations[j][0], "longitude": locations[j][1]}}}
+
+                                request_body = {
+                                    "origin": origin,
+                                    "destination": destination,
+                                    "travelMode": "DRIVE",
+                                    "routingPreference": "TRAFFIC_AWARE_OPTIMAL",
+                                    "computeAlternativeRoutes": False,
+                                    "languageCode": "en-US",
+                                    "units": "METRIC"
+                                }
+
+                                url = "https://routes.googleapis.com/directions/v2:computeRoutes"
+                                headers = {
+                                    "Content-Type": "application/json",
+                                    "X-Goog-Api-Key": api_key,
+                                    "X-Goog-FieldMask": "routes.duration,routes.distanceMeters"
+                                }
+
+                                response = requests.post(url, json=request_body, headers=headers)
+
+                                if response.status_code == 200:
+                                    result = response.json()
+                                    if result.get('routes'):
+                                        route = result['routes'][0]
+                                        distance_meters = route.get('distanceMeters', 0)
+                                        duration_seconds = route.get('duration', '0s').rstrip('s')
+
+                                        self.driver_distance_matrix[i][j] = distance_meters / 1000  # Convert to km
+                                        self.driver_time_matrix[i][j] = float(duration_seconds) / 60 if duration_seconds.replace('.', '').isdigit() else 0  # Convert to minutes
+                                        success_count += 1
+                                    else:
+                                        # Fallback to Euclidean distance
+                                        lat1, lon1 = locations[i]
+                                        lat2, lon2 = locations[j]
+                                        dist = self.haversine_distance(lat1, lon1, lat2, lon2)
+                                        self.driver_distance_matrix[i][j] = dist
+                                        self.driver_time_matrix[i][j] = dist * 2
+                                else:
+                                    # Fallback to Euclidean distance for failed requests
+                                    lat1, lon1 = locations[i]
+                                    lat2, lon2 = locations[j]
+                                    dist = self.haversine_distance(lat1, lon1, lat2, lon2)
+                                    self.driver_distance_matrix[i][j] = dist
+                                    self.driver_time_matrix[i][j] = dist * 2
+
+                            except Exception as route_error:
+                                # Fallback to Euclidean distance for any exception
                                 lat1, lon1 = locations[i]
                                 lat2, lon2 = locations[j]
                                 dist = self.haversine_distance(lat1, lon1, lat2, lon2)
                                 self.driver_distance_matrix[i][j] = dist
-                                self.driver_time_matrix[i][j] = dist * 2  # Estimate 30 km/h average speed
+                                self.driver_time_matrix[i][j] = dist * 2
 
-                    print(f"✅ Successfully fetched {success_count}/{n*n} real-time distances")
-                else:
-                    raise Exception(f"Distance Matrix API failed: {matrix_result['status']}")
+                print(f"✅ Successfully fetched {success_count} real-time routes from Google Routes API")
 
             except Exception as e:
-                print(f"❌ Google Distance Matrix API error: {e}")
+                print(f"❌ Google Maps API error: {e}")
                 print("📍 Falling back to simulated distances")
-                self.driver_distance_matrix = self.calculate_euclidean_matrix(locations)
+                self.driver_distance_matrix = self.calculate_euclidean_matrix(
+                    locations)
                 self.driver_time_matrix = self.driver_distance_matrix * 2
         else:
             # Fallback to Euclidean distance
-            print("📍 Using simulated distances (Haversine formula)")
-            self.driver_distance_matrix = self.calculate_euclidean_matrix(locations)
+            print("📍 Using simulated distances (Euclidean)")
+            self.driver_distance_matrix = self.calculate_euclidean_matrix(
+                locations)
             self.driver_time_matrix = self.driver_distance_matrix * 2
 
         # Drone distance matrix (straight line distance)
