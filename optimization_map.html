@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_fc3944abf05f880a9c40401e51531fbc {
+                #map_2047be34306793993a79d2f653ad5301 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -67,24 +67,24 @@
         <p><i class="glyphicon glyphicon-user" style="color:lightblue; margin-right: 5px;"></i>Normal</p>
         <hr style="margin: 8px 0;">
         <p><b>Routes:</b></p>
-        <p><span style="border: 2px dashed blue; padding: 2px 8px;">━━━</span> Drone Routes (Direct)</p>
-        <p><span style="border: 2px solid green; padding: 2px 8px;">━━━</span> Driver Routes (Roads)</p>
+        <p><span style="color: #1f77b4; font-size: 16px;">🚁 ━ ━ ━</span> Drone Routes (Direct Flight)</p>
+        <p><span style="color: #8c564b; font-size: 16px;">🚗 ━━━━━</span> Driver Routes (Road Network)</p>
         <hr style="margin: 8px 0;">
         <p><b>Summary:</b></p>
-        <p>Total Vehicles: 7</p>
+        <p>Total Vehicles: 8</p>
         <p>Total Weight: 25.3 kg</p>
-        <p>Efficiency: 2.00</p>
+        <p>Efficiency: 1.75</p>
         </div>
         
     
-            <div class="folium-map" id="map_fc3944abf05f880a9c40401e51531fbc" ></div>
+            <div class="folium-map" id="map_2047be34306793993a79d2f653ad5301" ></div>
         
 </body>
 <script>
     
     
-            var map_fc3944abf05f880a9c40401e51531fbc = L.map(
-                "map_fc3944abf05f880a9c40401e51531fbc",
+            var map_2047be34306793993a79d2f653ad5301 = L.map(
+                "map_2047be34306793993a79d2f653ad5301",
                 {
                     center: [32.7767, -96.797],
                     crs: L.CRS.EPSG3857,
@@ -101,7 +101,7 @@
 
         
     
-            var tile_layer_c2f3ac69a13b9b9f4bd9dd7a4dc9a721 = L.tileLayer(
+            var tile_layer_fa5e6840cd8cb82091aa960a3c6c3499 = L.tileLayer(
                 "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
                 {
   "minZoom": 0,
@@ -118,17 +118,17 @@
             );
         
     
-            tile_layer_c2f3ac69a13b9b9f4bd9dd7a4dc9a721.addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            tile_layer_fa5e6840cd8cb82091aa960a3c6c3499.addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var marker_9b6ce033a85b48b8609a28dc22bf0e03 = L.marker(
+            var marker_db3405c1eddd9d060ac51f8b65bf2ba4 = L.marker(
                 [32.7767, -96.797],
                 {
 }
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var icon_78fd1e215b437356285c242c4423a9d9 = L.AwesomeMarkers.icon(
+            var icon_f070c58c939f89f30d4c210b3f06d531 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "red",
   "iconColor": "white",
@@ -139,24 +139,24 @@
             );
         
     
-        var popup_fb8167a55e66cba0e264204ce1554f2c = L.popup({
+        var popup_dfa51e15dd65491a484891e33d848dfa = L.popup({
   "maxWidth": 200,
 });
 
         
             
-                var html_b38f8be13ad9aa7c16d9ec1183923e8b = $(`<div id="html_b38f8be13ad9aa7c16d9ec1183923e8b" style="width: 100.0%; height: 100.0%;"><b>🏪 Walmart Warehouse</b><br>Distribution Center</div>`)[0];
-                popup_fb8167a55e66cba0e264204ce1554f2c.setContent(html_b38f8be13ad9aa7c16d9ec1183923e8b);
+                var html_5e0843d5024c3c7ea614c903e1435562 = $(`<div id="html_5e0843d5024c3c7ea614c903e1435562" style="width: 100.0%; height: 100.0%;"><b>🏪 Walmart Warehouse</b><br>Distribution Center</div>`)[0];
+                popup_dfa51e15dd65491a484891e33d848dfa.setContent(html_5e0843d5024c3c7ea614c903e1435562);
             
         
 
-        marker_9b6ce033a85b48b8609a28dc22bf0e03.bindPopup(popup_fb8167a55e66cba0e264204ce1554f2c)
+        marker_db3405c1eddd9d060ac51f8b65bf2ba4.bindPopup(popup_dfa51e15dd65491a484891e33d848dfa)
         ;
 
         
     
     
-            marker_9b6ce033a85b48b8609a28dc22bf0e03.bindTooltip(
+            marker_db3405c1eddd9d060ac51f8b65bf2ba4.bindTooltip(
                 `<div>
                      Warehouse
                  </div>`,
@@ -166,33 +166,33 @@
             );
         
     
-                marker_9b6ce033a85b48b8609a28dc22bf0e03.setIcon(icon_78fd1e215b437356285c242c4423a9d9);
+                marker_db3405c1eddd9d060ac51f8b65bf2ba4.setIcon(icon_f070c58c939f89f30d4c210b3f06d531);
             
     
-            var poly_line_eaac350306bdb4d4d97d42cc05d84fac = L.polyline(
+            var poly_line_2d498779e51924566b139f35e3b37e53 = L.polyline(
                 [[32.7767, -96.797], [32.7615, -96.769], [32.7767, -96.797]],
-                {"bubblingMouseEvents": true, "color": "blue", "dashArray": "10, 5", "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#1f77b4", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-        var popup_4524958eb75142918c76518379a098c9 = L.popup({
+        var popup_ec3b8953ebb4337d939a8c5c65f436bb = L.popup({
   "maxWidth": 200,
 });
 
         
             
-                var html_658b1583d8cbf5b38b2b7c708a224001 = $(`<div id="html_658b1583d8cbf5b38b2b7c708a224001" style="width: 100.0%; height: 100.0%;">             <b>Drone-1</b><br>             Type: 🚁 Drone<br>             Customers: 1<br>             Total Weight: 2.5 kg             </div>`)[0];
-                popup_4524958eb75142918c76518379a098c9.setContent(html_658b1583d8cbf5b38b2b7c708a224001);
+                var html_2d99eb62bd585d1c34f643330676dd9c = $(`<div id="html_2d99eb62bd585d1c34f643330676dd9c" style="width: 100.0%; height: 100.0%;">             <b>Drone-1</b><br>             Type: 🚁 Drone<br>             Customers: 1<br>             Total Weight: 2.5 kg             </div>`)[0];
+                popup_ec3b8953ebb4337d939a8c5c65f436bb.setContent(html_2d99eb62bd585d1c34f643330676dd9c);
             
         
 
-        poly_line_eaac350306bdb4d4d97d42cc05d84fac.bindPopup(popup_4524958eb75142918c76518379a098c9)
+        poly_line_2d498779e51924566b139f35e3b37e53.bindPopup(popup_ec3b8953ebb4337d939a8c5c65f436bb)
         ;
 
         
     
     
-            poly_line_eaac350306bdb4d4d97d42cc05d84fac.bindTooltip(
+            poly_line_2d498779e51924566b139f35e3b37e53.bindTooltip(
                 `<div>
                      drone_1 Route
                  </div>`,
@@ -202,14 +202,14 @@
             );
         
     
-            var marker_db1bdd4f1f5f55a496ddce79c914af61 = L.marker(
+            var marker_a277cdd0f2e21deecf90f1188f9c1b6d = L.marker(
                 [32.7615, -96.769],
                 {
 }
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var icon_0a5e9e47a7aade456b161afc3eb9c4ad = L.AwesomeMarkers.icon(
+            var icon_a84848f7967be5ec975ae43561a378a0 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "lightblue",
   "iconColor": "white",
@@ -220,24 +220,24 @@
             );
         
     
-        var popup_33059982d4b0aa8fdff31ec4f9e82192 = L.popup({
+        var popup_b3c7c6240566741962a466575d3c6392 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_635dc8b9ad7092cf83a0845e11721c95 = $(`<div id="html_635dc8b9ad7092cf83a0845e11721c95" style="width: 100.0%; height: 100.0%;">                 <b>Customer 6</b><br>                 Priority: Normal<br>                 Weight: 2.5 kg<br>                 Vehicle: Drone-1<br>                 Coordinates: 32.7615, -96.7690                 </div>`)[0];
-                popup_33059982d4b0aa8fdff31ec4f9e82192.setContent(html_635dc8b9ad7092cf83a0845e11721c95);
+                var html_3415864be9c02f3093422afdc5796681 = $(`<div id="html_3415864be9c02f3093422afdc5796681" style="width: 100.0%; height: 100.0%;">                 <b>Customer 6</b><br>                 Priority: Normal<br>                 Weight: 2.5 kg<br>                 Vehicle: Drone-1<br>                 Coordinates: 32.7615, -96.7690                 </div>`)[0];
+                popup_b3c7c6240566741962a466575d3c6392.setContent(html_3415864be9c02f3093422afdc5796681);
             
         
 
-        marker_db1bdd4f1f5f55a496ddce79c914af61.bindPopup(popup_33059982d4b0aa8fdff31ec4f9e82192)
+        marker_a277cdd0f2e21deecf90f1188f9c1b6d.bindPopup(popup_b3c7c6240566741962a466575d3c6392)
         ;
 
         
     
     
-            marker_db1bdd4f1f5f55a496ddce79c914af61.bindTooltip(
+            marker_a277cdd0f2e21deecf90f1188f9c1b6d.bindTooltip(
                 `<div>
                      Customer 6 (normal)
                  </div>`,
@@ -247,33 +247,33 @@
             );
         
     
-                marker_db1bdd4f1f5f55a496ddce79c914af61.setIcon(icon_0a5e9e47a7aade456b161afc3eb9c4ad);
+                marker_a277cdd0f2e21deecf90f1188f9c1b6d.setIcon(icon_a84848f7967be5ec975ae43561a378a0);
             
     
-            var poly_line_f1e3abf0a759b5def1a3f0910c75ceb0 = L.polyline(
-                [[32.7767, -96.797], [32.8129, -96.7684], [32.768, -96.829], [32.7767, -96.797]],
-                {"bubblingMouseEvents": true, "color": "green", "dashArray": "10, 5", "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            var poly_line_b2a5d78d0e8292e7084ebca346068277 = L.polyline(
+                [[32.7767, -96.797], [32.8098, -96.8344], [32.768, -96.829], [32.755, -96.756], [32.7767, -96.797]],
+                {"bubblingMouseEvents": true, "color": "#ff7f0e", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#ff7f0e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-        var popup_885e25bf9340e507ceec7b173435fdb4 = L.popup({
+        var popup_fddbed4505417579d6188d80174ea7ac = L.popup({
   "maxWidth": 200,
 });
 
         
             
-                var html_28a61c6657c24e798342d50ae934f5c7 = $(`<div id="html_28a61c6657c24e798342d50ae934f5c7" style="width: 100.0%; height: 100.0%;">             <b>Drone-2</b><br>             Type: 🚁 Drone<br>             Customers: 2<br>             Total Weight: 2.7 kg             </div>`)[0];
-                popup_885e25bf9340e507ceec7b173435fdb4.setContent(html_28a61c6657c24e798342d50ae934f5c7);
+                var html_45475bdc0b311d0b494aa05f4e0ea389 = $(`<div id="html_45475bdc0b311d0b494aa05f4e0ea389" style="width: 100.0%; height: 100.0%;">             <b>Drone-2</b><br>             Type: 🚁 Drone<br>             Customers: 3<br>             Total Weight: 2.8 kg             </div>`)[0];
+                popup_fddbed4505417579d6188d80174ea7ac.setContent(html_45475bdc0b311d0b494aa05f4e0ea389);
             
         
 
-        poly_line_f1e3abf0a759b5def1a3f0910c75ceb0.bindPopup(popup_885e25bf9340e507ceec7b173435fdb4)
+        poly_line_b2a5d78d0e8292e7084ebca346068277.bindPopup(popup_fddbed4505417579d6188d80174ea7ac)
         ;
 
         
     
     
-            poly_line_f1e3abf0a759b5def1a3f0910c75ceb0.bindTooltip(
+            poly_line_b2a5d78d0e8292e7084ebca346068277.bindTooltip(
                 `<div>
                      drone_2 Route
                  </div>`,
@@ -283,578 +283,14 @@
             );
         
     
-            var marker_b4e3db5084d16b3484755f421805391b = L.marker(
-                [32.8129, -96.7684],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_e4bf30c7771231be3de48b3870fefdc9 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "orange",
-  "iconColor": "white",
-  "icon": "star",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_63369b832f2bf803ea3dc3fab4779c79 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_e07f39f262d7587ad453087c3780806f = $(`<div id="html_e07f39f262d7587ad453087c3780806f" style="width: 100.0%; height: 100.0%;">                 <b>Customer 3</b><br>                 Priority: Prime<br>                 Weight: 1.5 kg<br>                 Vehicle: Drone-2<br>                 Coordinates: 32.8129, -96.7684                 </div>`)[0];
-                popup_63369b832f2bf803ea3dc3fab4779c79.setContent(html_e07f39f262d7587ad453087c3780806f);
-            
-        
-
-        marker_b4e3db5084d16b3484755f421805391b.bindPopup(popup_63369b832f2bf803ea3dc3fab4779c79)
-        ;
-
-        
-    
-    
-            marker_b4e3db5084d16b3484755f421805391b.bindTooltip(
-                `<div>
-                     Customer 3 (prime)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_b4e3db5084d16b3484755f421805391b.setIcon(icon_e4bf30c7771231be3de48b3870fefdc9);
-            
-    
-            var marker_521e0cba9f9aaba374f46659bf8be451 = L.marker(
-                [32.768, -96.829],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_64f01abb16a137c51ce4302d1069d7f4 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "orange",
-  "iconColor": "white",
-  "icon": "star",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_7dec336ef2a7894a3fa2a62056b85ca5 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_4c20268f1b8c25cda745e6865e4c159a = $(`<div id="html_4c20268f1b8c25cda745e6865e4c159a" style="width: 100.0%; height: 100.0%;">                 <b>Customer 10</b><br>                 Priority: Prime<br>                 Weight: 1.2 kg<br>                 Vehicle: Drone-2<br>                 Coordinates: 32.7680, -96.8290                 </div>`)[0];
-                popup_7dec336ef2a7894a3fa2a62056b85ca5.setContent(html_4c20268f1b8c25cda745e6865e4c159a);
-            
-        
-
-        marker_521e0cba9f9aaba374f46659bf8be451.bindPopup(popup_7dec336ef2a7894a3fa2a62056b85ca5)
-        ;
-
-        
-    
-    
-            marker_521e0cba9f9aaba374f46659bf8be451.bindTooltip(
-                `<div>
-                     Customer 10 (prime)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_521e0cba9f9aaba374f46659bf8be451.setIcon(icon_64f01abb16a137c51ce4302d1069d7f4);
-            
-    
-            var poly_line_ae624b9fefc8f71890b2ebf2b6d07ecb = L.polyline(
-                [[32.7767, -96.797], [32.7505, -96.8309], [32.815, -96.81], [32.7767, -96.797]],
-                {"bubblingMouseEvents": true, "color": "purple", "dashArray": "10, 5", "dashOffset": null, "fill": false, "fillColor": "purple", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-        var popup_ba16b954433bf87450090afbf45f863d = L.popup({
-  "maxWidth": 200,
-});
-
-        
-            
-                var html_3f162188c44936229e9d6032352d7164 = $(`<div id="html_3f162188c44936229e9d6032352d7164" style="width: 100.0%; height: 100.0%;">             <b>Drone-3</b><br>             Type: 🚁 Drone<br>             Customers: 2<br>             Total Weight: 2.8 kg             </div>`)[0];
-                popup_ba16b954433bf87450090afbf45f863d.setContent(html_3f162188c44936229e9d6032352d7164);
-            
-        
-
-        poly_line_ae624b9fefc8f71890b2ebf2b6d07ecb.bindPopup(popup_ba16b954433bf87450090afbf45f863d)
-        ;
-
-        
-    
-    
-            poly_line_ae624b9fefc8f71890b2ebf2b6d07ecb.bindTooltip(
-                `<div>
-                     drone_3 Route
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var marker_51d62b8d436c301d5040d8e8f85faeed = L.marker(
-                [32.7505, -96.8309],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_c16f5a10a4910ee8c96c1c190dbdf591 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "red",
-  "iconColor": "white",
-  "icon": "exclamation-sign",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_ec0ee7b2a7c0851760b6be505aefbaab = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_2f296ff10efdf353fb866cffa34a4c6a = $(`<div id="html_2f296ff10efdf353fb866cffa34a4c6a" style="width: 100.0%; height: 100.0%;">                 <b>Customer 2</b><br>                 Priority: Emergency<br>                 Weight: 0.8 kg<br>                 Vehicle: Drone-3<br>                 Coordinates: 32.7505, -96.8309                 </div>`)[0];
-                popup_ec0ee7b2a7c0851760b6be505aefbaab.setContent(html_2f296ff10efdf353fb866cffa34a4c6a);
-            
-        
-
-        marker_51d62b8d436c301d5040d8e8f85faeed.bindPopup(popup_ec0ee7b2a7c0851760b6be505aefbaab)
-        ;
-
-        
-    
-    
-            marker_51d62b8d436c301d5040d8e8f85faeed.bindTooltip(
-                `<div>
-                     Customer 2 (emergency)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_51d62b8d436c301d5040d8e8f85faeed.setIcon(icon_c16f5a10a4910ee8c96c1c190dbdf591);
-            
-    
-            var marker_f8437d57a693bf98464249b81a740e2e = L.marker(
-                [32.815, -96.81],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_3ab22b91d617b835edcb5987cd3d48a2 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "lightblue",
-  "iconColor": "white",
-  "icon": "user",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_cbdfdf94168503109945ee37ee595881 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_c3ac7df9a66dedf092ce8e13453a5012 = $(`<div id="html_c3ac7df9a66dedf092ce8e13453a5012" style="width: 100.0%; height: 100.0%;">                 <b>Customer 13</b><br>                 Priority: Normal<br>                 Weight: 2.0 kg<br>                 Vehicle: Drone-3<br>                 Coordinates: 32.8150, -96.8100                 </div>`)[0];
-                popup_cbdfdf94168503109945ee37ee595881.setContent(html_c3ac7df9a66dedf092ce8e13453a5012);
-            
-        
-
-        marker_f8437d57a693bf98464249b81a740e2e.bindPopup(popup_cbdfdf94168503109945ee37ee595881)
-        ;
-
-        
-    
-    
-            marker_f8437d57a693bf98464249b81a740e2e.bindTooltip(
-                `<div>
-                     Customer 13 (normal)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_f8437d57a693bf98464249b81a740e2e.setIcon(icon_3ab22b91d617b835edcb5987cd3d48a2);
-            
-    
-            var poly_line_a0b730b3868a12f6fb9c74ccf04e3695 = L.polyline(
-                [[32.7767, -96.797], [32.789, -96.8156], [32.755, -96.756], [32.74, -96.775], [32.7767, -96.797]],
-                {"bubblingMouseEvents": true, "color": "orange", "dashArray": "10, 5", "dashOffset": null, "fill": false, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-        var popup_db294fcbc419f1f0a7bebae0647b91c7 = L.popup({
-  "maxWidth": 200,
-});
-
-        
-            
-                var html_19f5c3000bc164069f60a35966136497 = $(`<div id="html_19f5c3000bc164069f60a35966136497" style="width: 100.0%; height: 100.0%;">             <b>Drone-4</b><br>             Type: 🚁 Drone<br>             Customers: 3<br>             Total Weight: 2.9 kg             </div>`)[0];
-                popup_db294fcbc419f1f0a7bebae0647b91c7.setContent(html_19f5c3000bc164069f60a35966136497);
-            
-        
-
-        poly_line_a0b730b3868a12f6fb9c74ccf04e3695.bindPopup(popup_db294fcbc419f1f0a7bebae0647b91c7)
-        ;
-
-        
-    
-    
-            poly_line_a0b730b3868a12f6fb9c74ccf04e3695.bindTooltip(
-                `<div>
-                     drone_4 Route
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var marker_f06745cdecb5e471e30ca09585762631 = L.marker(
-                [32.789, -96.8156],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_8118057377e5d87bea109148b1fbf0ac = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "red",
-  "iconColor": "white",
-  "icon": "exclamation-sign",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_7e2fc252e412039994c90c85d2df8302 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_3e9150ff96c148e0674281a85e683449 = $(`<div id="html_3e9150ff96c148e0674281a85e683449" style="width: 100.0%; height: 100.0%;">                 <b>Customer 7</b><br>                 Priority: Emergency<br>                 Weight: 0.9 kg<br>                 Vehicle: Drone-4<br>                 Coordinates: 32.7890, -96.8156                 </div>`)[0];
-                popup_7e2fc252e412039994c90c85d2df8302.setContent(html_3e9150ff96c148e0674281a85e683449);
-            
-        
-
-        marker_f06745cdecb5e471e30ca09585762631.bindPopup(popup_7e2fc252e412039994c90c85d2df8302)
-        ;
-
-        
-    
-    
-            marker_f06745cdecb5e471e30ca09585762631.bindTooltip(
-                `<div>
-                     Customer 7 (emergency)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_f06745cdecb5e471e30ca09585762631.setIcon(icon_8118057377e5d87bea109148b1fbf0ac);
-            
-    
-            var marker_6640f31f37db7c1513e0f56ebeb8c4ef = L.marker(
-                [32.755, -96.756],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_40507ec422a0372b9b3ed35dcda9b1a9 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "red",
-  "iconColor": "white",
-  "icon": "exclamation-sign",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_ba55dfb493e7da55e4c8914bd51733b0 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_dac241c90ee58ad70508b9889648364d = $(`<div id="html_dac241c90ee58ad70508b9889648364d" style="width: 100.0%; height: 100.0%;">                 <b>Customer 12</b><br>                 Priority: Emergency<br>                 Weight: 0.6 kg<br>                 Vehicle: Drone-4<br>                 Coordinates: 32.7550, -96.7560                 </div>`)[0];
-                popup_ba55dfb493e7da55e4c8914bd51733b0.setContent(html_dac241c90ee58ad70508b9889648364d);
-            
-        
-
-        marker_6640f31f37db7c1513e0f56ebeb8c4ef.bindPopup(popup_ba55dfb493e7da55e4c8914bd51733b0)
-        ;
-
-        
-    
-    
-            marker_6640f31f37db7c1513e0f56ebeb8c4ef.bindTooltip(
-                `<div>
-                     Customer 12 (emergency)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_6640f31f37db7c1513e0f56ebeb8c4ef.setIcon(icon_40507ec422a0372b9b3ed35dcda9b1a9);
-            
-    
-            var marker_a6c953f41e935616d9afc1e548127848 = L.marker(
-                [32.74, -96.775],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_7e461de571bc9135d06e149ac17f55f0 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "orange",
-  "iconColor": "white",
-  "icon": "star",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_711baeba0c041ffafbe835b816a6983a = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_41f510dcc341746981cd4c246d0f41b3 = $(`<div id="html_41f510dcc341746981cd4c246d0f41b3" style="width: 100.0%; height: 100.0%;">                 <b>Customer 14</b><br>                 Priority: Prime<br>                 Weight: 1.4 kg<br>                 Vehicle: Drone-4<br>                 Coordinates: 32.7400, -96.7750                 </div>`)[0];
-                popup_711baeba0c041ffafbe835b816a6983a.setContent(html_41f510dcc341746981cd4c246d0f41b3);
-            
-        
-
-        marker_a6c953f41e935616d9afc1e548127848.bindPopup(popup_711baeba0c041ffafbe835b816a6983a)
-        ;
-
-        
-    
-    
-            marker_a6c953f41e935616d9afc1e548127848.bindTooltip(
-                `<div>
-                     Customer 14 (prime)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_a6c953f41e935616d9afc1e548127848.setIcon(icon_7e461de571bc9135d06e149ac17f55f0);
-            
-    
-            var poly_line_5bd59a6e6d2f641b8511b9bf7e5eb32a = L.polyline(
-                [[32.7767, -96.797], [32.7851, -96.8067], [32.7767, -96.797]],
-                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": "10, 5", "dashOffset": null, "fill": false, "fillColor": "darkred", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-        var popup_905548c7c824345a44ce6eb86321b639 = L.popup({
-  "maxWidth": 200,
-});
-
-        
-            
-                var html_b64aa3b4e311d1d4085af18db59fa81a = $(`<div id="html_b64aa3b4e311d1d4085af18db59fa81a" style="width: 100.0%; height: 100.0%;">             <b>Drone-5</b><br>             Type: 🚁 Drone<br>             Customers: 1<br>             Total Weight: 2.1 kg             </div>`)[0];
-                popup_905548c7c824345a44ce6eb86321b639.setContent(html_b64aa3b4e311d1d4085af18db59fa81a);
-            
-        
-
-        poly_line_5bd59a6e6d2f641b8511b9bf7e5eb32a.bindPopup(popup_905548c7c824345a44ce6eb86321b639)
-        ;
-
-        
-    
-    
-            poly_line_5bd59a6e6d2f641b8511b9bf7e5eb32a.bindTooltip(
-                `<div>
-                     drone_5 Route
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var marker_142d105a50709933e6c7851a5562cdc2 = L.marker(
-                [32.7851, -96.8067],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_ff1f9090094cd4b1de64351a9778fa34 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "lightblue",
-  "iconColor": "white",
-  "icon": "user",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_fa7aaad8ded3fa6503a1d251df240c53 = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_75f9c69b90ed8c9cb77fcf515a87025a = $(`<div id="html_75f9c69b90ed8c9cb77fcf515a87025a" style="width: 100.0%; height: 100.0%;">                 <b>Customer 1</b><br>                 Priority: Normal<br>                 Weight: 2.1 kg<br>                 Vehicle: Drone-5<br>                 Coordinates: 32.7851, -96.8067                 </div>`)[0];
-                popup_fa7aaad8ded3fa6503a1d251df240c53.setContent(html_75f9c69b90ed8c9cb77fcf515a87025a);
-            
-        
-
-        marker_142d105a50709933e6c7851a5562cdc2.bindPopup(popup_fa7aaad8ded3fa6503a1d251df240c53)
-        ;
-
-        
-    
-    
-            marker_142d105a50709933e6c7851a5562cdc2.bindTooltip(
-                `<div>
-                     Customer 1 (normal)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_142d105a50709933e6c7851a5562cdc2.setIcon(icon_ff1f9090094cd4b1de64351a9778fa34);
-            
-    
-            var poly_line_3874fd4e93782c2948ea4d8b56592bbb = L.polyline(
-                [[32.7767, -96.797], [32.732, -96.802], [32.8098, -96.8344], [32.7767, -96.797]],
-                {"bubblingMouseEvents": true, "color": "lightred", "dashArray": "10, 5", "dashOffset": null, "fill": false, "fillColor": "lightred", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-        var popup_3f9ae6cd36a79e3ae51c4d0db7879771 = L.popup({
-  "maxWidth": 200,
-});
-
-        
-            
-                var html_e00d4216b2b363030944ec9dd8cbc2e7 = $(`<div id="html_e00d4216b2b363030944ec9dd8cbc2e7" style="width: 100.0%; height: 100.0%;">             <b>Drone-6</b><br>             Type: 🚁 Drone<br>             Customers: 2<br>             Total Weight: 2.8 kg             </div>`)[0];
-                popup_3f9ae6cd36a79e3ae51c4d0db7879771.setContent(html_e00d4216b2b363030944ec9dd8cbc2e7);
-            
-        
-
-        poly_line_3874fd4e93782c2948ea4d8b56592bbb.bindPopup(popup_3f9ae6cd36a79e3ae51c4d0db7879771)
-        ;
-
-        
-    
-    
-            poly_line_3874fd4e93782c2948ea4d8b56592bbb.bindTooltip(
-                `<div>
-                     drone_6 Route
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-            var marker_a86a22dc01485e5b87c9fccde108e9ea = L.marker(
-                [32.732, -96.802],
-                {
-}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
-        
-    
-            var icon_df7ddd8f31f47d2b3593e1936abb26a5 = L.AwesomeMarkers.icon(
-                {
-  "markerColor": "orange",
-  "iconColor": "white",
-  "icon": "star",
-  "prefix": "glyphicon",
-  "extraClasses": "fa-rotate-0",
-}
-            );
-        
-    
-        var popup_db71824a2a0d15cd96fccfef8812918e = L.popup({
-  "maxWidth": 250,
-});
-
-        
-            
-                var html_9c1e9eb8c0ff8b5505c4a746adf4c885 = $(`<div id="html_9c1e9eb8c0ff8b5505c4a746adf4c885" style="width: 100.0%; height: 100.0%;">                 <b>Customer 8</b><br>                 Priority: Prime<br>                 Weight: 1.8 kg<br>                 Vehicle: Drone-6<br>                 Coordinates: 32.7320, -96.8020                 </div>`)[0];
-                popup_db71824a2a0d15cd96fccfef8812918e.setContent(html_9c1e9eb8c0ff8b5505c4a746adf4c885);
-            
-        
-
-        marker_a86a22dc01485e5b87c9fccde108e9ea.bindPopup(popup_db71824a2a0d15cd96fccfef8812918e)
-        ;
-
-        
-    
-    
-            marker_a86a22dc01485e5b87c9fccde108e9ea.bindTooltip(
-                `<div>
-                     Customer 8 (prime)
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-                marker_a86a22dc01485e5b87c9fccde108e9ea.setIcon(icon_df7ddd8f31f47d2b3593e1936abb26a5);
-            
-    
-            var marker_92744538f814711a8ec5deb591b89f62 = L.marker(
+            var marker_f9425c92fd495044c509834c126e1c26 = L.marker(
                 [32.8098, -96.8344],
                 {
 }
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var icon_e26480d3c7acd51d44d79d7376780667 = L.AwesomeMarkers.icon(
+            var icon_11b9aea4a6fe94a4f250ab9702396645 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "orange",
   "iconColor": "white",
@@ -865,24 +301,24 @@
             );
         
     
-        var popup_60e2e2431c25b8fa122021f768535277 = L.popup({
+        var popup_77df03343012de3f8974ce7590a8e24a = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_5e833079850aa8120d318af1d301c38d = $(`<div id="html_5e833079850aa8120d318af1d301c38d" style="width: 100.0%; height: 100.0%;">                 <b>Customer 5</b><br>                 Priority: Prime<br>                 Weight: 1.0 kg<br>                 Vehicle: Drone-6<br>                 Coordinates: 32.8098, -96.8344                 </div>`)[0];
-                popup_60e2e2431c25b8fa122021f768535277.setContent(html_5e833079850aa8120d318af1d301c38d);
+                var html_014a74f2a64ec8741d7a499a1d24a509 = $(`<div id="html_014a74f2a64ec8741d7a499a1d24a509" style="width: 100.0%; height: 100.0%;">                 <b>Customer 5</b><br>                 Priority: Prime<br>                 Weight: 1.0 kg<br>                 Vehicle: Drone-2<br>                 Coordinates: 32.8098, -96.8344                 </div>`)[0];
+                popup_77df03343012de3f8974ce7590a8e24a.setContent(html_014a74f2a64ec8741d7a499a1d24a509);
             
         
 
-        marker_92744538f814711a8ec5deb591b89f62.bindPopup(popup_60e2e2431c25b8fa122021f768535277)
+        marker_f9425c92fd495044c509834c126e1c26.bindPopup(popup_77df03343012de3f8974ce7590a8e24a)
         ;
 
         
     
     
-            marker_92744538f814711a8ec5deb591b89f62.bindTooltip(
+            marker_f9425c92fd495044c509834c126e1c26.bindTooltip(
                 `<div>
                      Customer 5 (prime)
                  </div>`,
@@ -892,35 +328,47 @@
             );
         
     
-                marker_92744538f814711a8ec5deb591b89f62.setIcon(icon_e26480d3c7acd51d44d79d7376780667);
+                marker_f9425c92fd495044c509834c126e1c26.setIcon(icon_11b9aea4a6fe94a4f250ab9702396645);
             
     
-            var poly_line_57266f8bd18612f11697267c6d32a7fc = L.polyline(
-                [[32.77689, -96.79608], [32.77695, -96.79588], [32.77772, -96.79615], [32.77792, -96.7962], [32.77799, -96.7961], [32.77802, -96.79599], [32.77806, -96.79593], [32.77834, -96.79469], [32.7773, -96.79433], [32.77715, -96.79425], [32.7769, -96.79397], [32.77585, -96.79273], [32.77502, -96.79177], [32.77477, -96.79158], [32.77391, -96.79108], [32.77399, -96.7908], [32.7744, -96.79036], [32.77448, -96.79019], [32.77451, -96.78986], [32.77459, -96.7885], [32.77464, -96.7881], [32.7746, -96.78799], [32.77471, -96.78745], [32.77491, -96.78678], [32.77515, -96.78617], [32.77547, -96.78559], [32.77573, -96.7852], [32.77593, -96.78493], [32.77631, -96.78452], [32.77801, -96.78284], [32.77833, -96.7825], [32.77869, -96.78208], [32.77905, -96.78161], [32.77931, -96.78118], [32.77948, -96.78086], [32.77974, -96.7802], [32.77991, -96.77953], [32.78002, -96.77871], [32.78035, -96.77459], [32.78052, -96.77285], [32.78065, -96.7723], [32.78088, -96.77164], [32.78116, -96.77109], [32.78143, -96.77066], [32.78182, -96.77021], [32.78223, -96.76983], [32.78274, -96.76948], [32.78461, -96.76839], [32.78531, -96.76788], [32.78589, -96.76735], [32.78644, -96.76678], [32.7886, -96.76422], [32.78911, -96.76353], [32.78952, -96.76286], [32.78977, -96.76237], [32.79003, -96.76177], [32.79033, -96.76095], [32.79048, -96.76044], [32.79064, -96.75963], [32.79076, -96.75877], [32.79079, -96.75835], [32.79071, -96.75822], [32.7906, -96.757], [32.7906, -96.7566], [32.79064, -96.75568], [32.79063, -96.75548], [32.79109, -96.756], [32.79163, -96.75664], [32.79352, -96.75436], [32.79376, -96.75398], [32.79386, -96.75376], [32.79428, -96.75328], [32.8023, -96.74447], [32.80341, -96.7431], [32.80456, -96.74443], [32.80341, -96.7431], [32.80216, -96.74464], [32.79663, -96.7507], [32.79804, -96.75231], [32.79864, -96.75303], [32.79904, -96.75385], [32.79941, -96.75429], [32.79951, -96.75443], [32.79982, -96.75475], [32.80045, -96.75552], [32.8009, -96.75603], [32.80165, -96.75685], [32.80212, -96.75741], [32.80218, -96.7575], [32.80615, -96.7621], [32.80348, -96.76531], [32.80292, -96.76598], [32.80219, -96.76688], [32.79811, -96.7718], [32.79698, -96.77319], [32.79639, -96.77388], [32.79622, -96.77411], [32.79193, -96.77924], [32.7931, -96.78056], [32.79225, -96.78156], [32.79257, -96.78191], [32.79374, -96.78323], [32.79331, -96.78373], [32.79136, -96.78609], [32.78884, -96.78911], [32.78768, -96.7905], [32.78811, -96.79105], [32.78839, -96.7915], [32.78867, -96.7922], [32.78834, -96.79217], [32.78827, -96.79222], [32.78779, -96.79225], [32.78598, -96.79215], [32.78582, -96.79212], [32.78566, -96.79217], [32.7851, -96.79189], [32.78471, -96.7916], [32.78421, -96.79107], [32.78394, -96.79069], [32.78368, -96.79023], [32.78316, -96.78905], [32.78164, -96.78548], [32.78131, -96.78479], [32.78092, -96.78414], [32.78048, -96.78359], [32.77966, -96.78282], [32.77866, -96.78198], [32.77706, -96.78059], [32.77609, -96.77976], [32.77529, -96.77912], [32.77497, -96.7789], [32.7745, -96.77866], [32.77405, -96.7785], [32.77366, -96.7784], [32.77294, -96.77835], [32.77213, -96.77835], [32.7715, -96.77829], [32.77088, -96.77817], [32.77007, -96.77793], [32.76701, -96.77681], [32.76355, -96.77557], [32.76277, -96.77528], [32.7609, -96.77457], [32.75989, -96.77411], [32.75675, -96.77236], [32.75567, -96.77187], [32.75485, -96.77157], [32.75162, -96.77059], [32.75148, -96.77064], [32.74901, -96.77019], [32.74851, -96.77002], [32.74807, -96.7698], [32.74779, -96.76961], [32.74731, -96.76919], [32.74609, -96.76779], [32.74554, -96.76712], [32.74527, -96.76668], [32.74499, -96.76612], [32.74481, -96.76564], [32.74464, -96.76502], [32.74456, -96.76451], [32.74449, -96.76389], [32.74448, -96.76362], [32.74447, -96.76286], [32.74451, -96.76219], [32.74462, -96.76152], [32.74476, -96.76096], [32.74665, -96.75594], [32.74691, -96.75505], [32.74703, -96.75446], [32.74713, -96.75362], [32.74717, -96.75288], [32.74715, -96.7484], [32.74715, -96.74384], [32.74709, -96.74248], [32.7468, -96.74009], [32.74526, -96.72793], [32.74511, -96.72723], [32.74489, -96.72652], [32.74472, -96.72608], [32.74456, -96.72595], [32.74434, -96.72561], [32.74426, -96.72554], [32.74419, -96.72551], [32.74401, -96.72552], [32.74385, -96.72559], [32.74374, -96.72571], [32.74362, -96.72596], [32.74367, -96.72628], [32.74374, -96.72646], [32.74388, -96.72666], [32.74404, -96.72678], [32.74428, -96.72688], [32.74536, -96.72718], [32.74609, -96.72721], [32.74635, -96.72732], [32.74645, -96.72738], [32.74652, -96.72739], [32.74755, -96.72863], [32.74719, -96.72907], [32.747, -96.72922], [32.74678, -96.7293], [32.7462, -96.7294], [32.74603, -96.7295], [32.74589, -96.72965], [32.74579, -96.72987], [32.74578, -96.73026], [32.74573, -96.73038], [32.74715, -96.74159], [32.74724, -96.74249], [32.7473, -96.74346], [32.74732, -96.74841], [32.74727, -96.75304], [32.74724, -96.75367], [32.74715, -96.75451], [32.74701, -96.75524], [32.74686, -96.75587], [32.74661, -96.75663], [32.74609, -96.75813], [32.74516, -96.76074], [32.745, -96.76127], [32.74489, -96.76183], [32.74483, -96.76237], [32.74483, -96.76296], [32.74491, -96.76365], [32.74502, -96.7643], [32.74516, -96.76489], [32.74537, -96.76549], [32.74564, -96.76604], [32.74592, -96.76648], [32.74642, -96.76712], [32.74688, -96.76766], [32.74744, -96.7682], [32.74801, -96.76865], [32.74865, -96.76905], [32.74903, -96.76924], [32.74989, -96.76959], [32.75144, -96.77015], [32.75159, -96.7703], [32.75412, -96.7711], [32.75518, -96.77147], [32.7559, -96.77177], [32.75679, -96.77222], [32.7595, -96.77375], [32.7601, -96.77406], [32.76108, -96.77451], [32.76325, -96.7753], [32.76947, -96.77752], [32.77026, -96.77776], [32.77113, -96.77799], [32.77214, -96.77811], [32.77355, -96.77815], [32.77405, -96.77824], [32.77455, -96.77841], [32.77506, -96.77869], [32.77534, -96.77889], [32.77547, -96.77888], [32.77574, -96.77899], [32.77602, -96.77916], [32.77823, -96.7809], [32.77846, -96.78114], [32.7786, -96.78137], [32.77873, -96.78168], [32.77879, -96.7819], [32.77882, -96.78227], [32.77878, -96.78261], [32.77873, -96.78278], [32.77858, -96.78314], [32.77842, -96.78336], [32.77726, -96.78461], [32.77661, -96.78545], [32.7762, -96.78608], [32.77585, -96.78676], [32.77559, -96.78739], [32.77544, -96.78789], [32.77543, -96.78822], [32.77522, -96.78974], [32.77507, -96.79], [32.77469, -96.79031], [32.77463, -96.79042], [32.77458, -96.79059], [32.77451, -96.79068], [32.77418, -96.79233], [32.77403, -96.79268], [32.77387, -96.79298], [32.7732, -96.79382], [32.77292, -96.79417], [32.77249, -96.79476], [32.77327, -96.79557], [32.77368, -96.79599], [32.77386, -96.79609], [32.77455, -96.79679], [32.7754, -96.79772], [32.77553, -96.79785], [32.77567, -96.79794], [32.77594, -96.79675]],
-                {"bubblingMouseEvents": true, "color": "beige", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "beige", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            var marker_6081602397de8a2e6cc2680229242943 = L.marker(
+                [32.768, -96.829],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-        var popup_b921534d42a91e5b8d807eb88729622a = L.popup({
-  "maxWidth": 200,
+            var icon_ee068f670e614e7354ca503a3db6a52c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_79be6c0f24b18d5bf8869a6b31fd21e8 = L.popup({
+  "maxWidth": 250,
 });
 
         
             
-                var html_c110d2139026cf64bc46072aca31eddd = $(`<div id="html_c110d2139026cf64bc46072aca31eddd" style="width: 100.0%; height: 100.0%;">             <b>Driver-7</b><br>             Type: 🚗 Driver<br>             Customers: 3<br>             Total Weight: 9.5 kg             </div>`)[0];
-                popup_b921534d42a91e5b8d807eb88729622a.setContent(html_c110d2139026cf64bc46072aca31eddd);
+                var html_4e28b7c9635b08ab8223bb5ca0d744a8 = $(`<div id="html_4e28b7c9635b08ab8223bb5ca0d744a8" style="width: 100.0%; height: 100.0%;">                 <b>Customer 10</b><br>                 Priority: Prime<br>                 Weight: 1.2 kg<br>                 Vehicle: Drone-2<br>                 Coordinates: 32.7680, -96.8290                 </div>`)[0];
+                popup_79be6c0f24b18d5bf8869a6b31fd21e8.setContent(html_4e28b7c9635b08ab8223bb5ca0d744a8);
             
         
 
-        poly_line_57266f8bd18612f11697267c6d32a7fc.bindPopup(popup_b921534d42a91e5b8d807eb88729622a)
+        marker_6081602397de8a2e6cc2680229242943.bindPopup(popup_79be6c0f24b18d5bf8869a6b31fd21e8)
         ;
 
         
     
     
-            poly_line_57266f8bd18612f11697267c6d32a7fc.bindTooltip(
+            marker_6081602397de8a2e6cc2680229242943.bindTooltip(
                 `<div>
-                     driver_7 Route
+                     Customer 10 (prime)
                  </div>`,
                 {
   "sticky": true,
@@ -928,14 +376,356 @@
             );
         
     
-            var marker_2823264991d35f92b4185351cbfaee94 = L.marker(
-                [32.8045, -96.7445],
+                marker_6081602397de8a2e6cc2680229242943.setIcon(icon_ee068f670e614e7354ca503a3db6a52c);
+            
+    
+            var marker_dc58048aec11e56ad029b63009e2a6b6 = L.marker(
+                [32.755, -96.756],
                 {
 }
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var icon_362d82ac1004b929edbf1b3e58cc0b25 = L.AwesomeMarkers.icon(
+            var icon_9945bb0240524b33e9a202ccafec7c0a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_868ded77454335bd5adb3a57198c33d5 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_ab3200273efab275abdff7bf9ad41f56 = $(`<div id="html_ab3200273efab275abdff7bf9ad41f56" style="width: 100.0%; height: 100.0%;">                 <b>Customer 12</b><br>                 Priority: Emergency<br>                 Weight: 0.6 kg<br>                 Vehicle: Drone-2<br>                 Coordinates: 32.7550, -96.7560                 </div>`)[0];
+                popup_868ded77454335bd5adb3a57198c33d5.setContent(html_ab3200273efab275abdff7bf9ad41f56);
+            
+        
+
+        marker_dc58048aec11e56ad029b63009e2a6b6.bindPopup(popup_868ded77454335bd5adb3a57198c33d5)
+        ;
+
+        
+    
+    
+            marker_dc58048aec11e56ad029b63009e2a6b6.bindTooltip(
+                `<div>
+                     Customer 12 (emergency)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dc58048aec11e56ad029b63009e2a6b6.setIcon(icon_9945bb0240524b33e9a202ccafec7c0a);
+            
+    
+            var poly_line_dd0e70f2bffdaf082a7ee7eeccf830c1 = L.polyline(
+                [[32.7767, -96.797], [32.732, -96.802], [32.789, -96.8156], [32.7767, -96.797]],
+                {"bubblingMouseEvents": true, "color": "#2ca02c", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#2ca02c", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+        var popup_0a1331610cb8dc4a9420d47915f31745 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b2c55a5cba670964ac4e8e34161a4edf = $(`<div id="html_b2c55a5cba670964ac4e8e34161a4edf" style="width: 100.0%; height: 100.0%;">             <b>Drone-3</b><br>             Type: 🚁 Drone<br>             Customers: 2<br>             Total Weight: 2.7 kg             </div>`)[0];
+                popup_0a1331610cb8dc4a9420d47915f31745.setContent(html_b2c55a5cba670964ac4e8e34161a4edf);
+            
+        
+
+        poly_line_dd0e70f2bffdaf082a7ee7eeccf830c1.bindPopup(popup_0a1331610cb8dc4a9420d47915f31745)
+        ;
+
+        
+    
+    
+            poly_line_dd0e70f2bffdaf082a7ee7eeccf830c1.bindTooltip(
+                `<div>
+                     drone_3 Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f24082f5bd9fa33e8639c78d68ab802a = L.marker(
+                [32.732, -96.802],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_5091662b439002ae9eb0c655aae2a207 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bac6364e153fa77a3627ebe65254c69b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_25b718af1ea69f880b3626d9058bc20b = $(`<div id="html_25b718af1ea69f880b3626d9058bc20b" style="width: 100.0%; height: 100.0%;">                 <b>Customer 8</b><br>                 Priority: Prime<br>                 Weight: 1.8 kg<br>                 Vehicle: Drone-3<br>                 Coordinates: 32.7320, -96.8020                 </div>`)[0];
+                popup_bac6364e153fa77a3627ebe65254c69b.setContent(html_25b718af1ea69f880b3626d9058bc20b);
+            
+        
+
+        marker_f24082f5bd9fa33e8639c78d68ab802a.bindPopup(popup_bac6364e153fa77a3627ebe65254c69b)
+        ;
+
+        
+    
+    
+            marker_f24082f5bd9fa33e8639c78d68ab802a.bindTooltip(
+                `<div>
+                     Customer 8 (prime)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f24082f5bd9fa33e8639c78d68ab802a.setIcon(icon_5091662b439002ae9eb0c655aae2a207);
+            
+    
+            var marker_a0fc9ca8492d54faaf76cdeb43bc1436 = L.marker(
+                [32.789, -96.8156],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_79ff8539a79f5f0fecfe6d9bff0efd66 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0369f2a0cb25d5cd0ad86a2f1d90dd7f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_c53e5c631bd1da1e24f60b59c72c4e7d = $(`<div id="html_c53e5c631bd1da1e24f60b59c72c4e7d" style="width: 100.0%; height: 100.0%;">                 <b>Customer 7</b><br>                 Priority: Emergency<br>                 Weight: 0.9 kg<br>                 Vehicle: Drone-3<br>                 Coordinates: 32.7890, -96.8156                 </div>`)[0];
+                popup_0369f2a0cb25d5cd0ad86a2f1d90dd7f.setContent(html_c53e5c631bd1da1e24f60b59c72c4e7d);
+            
+        
+
+        marker_a0fc9ca8492d54faaf76cdeb43bc1436.bindPopup(popup_0369f2a0cb25d5cd0ad86a2f1d90dd7f)
+        ;
+
+        
+    
+    
+            marker_a0fc9ca8492d54faaf76cdeb43bc1436.bindTooltip(
+                `<div>
+                     Customer 7 (emergency)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a0fc9ca8492d54faaf76cdeb43bc1436.setIcon(icon_79ff8539a79f5f0fecfe6d9bff0efd66);
+            
+    
+            var poly_line_aa7fbc564b552b2ec06038f371329db4 = L.polyline(
+                [[32.7767, -96.797], [32.7505, -96.8309], [32.8129, -96.7684], [32.7767, -96.797]],
+                {"bubblingMouseEvents": true, "color": "#d62728", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#d62728", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+        var popup_98f3bdc9620f20e65ec96332a70e52c0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d54a2f8c44d02803aa2a9810c2c92fab = $(`<div id="html_d54a2f8c44d02803aa2a9810c2c92fab" style="width: 100.0%; height: 100.0%;">             <b>Drone-4</b><br>             Type: 🚁 Drone<br>             Customers: 2<br>             Total Weight: 2.3 kg             </div>`)[0];
+                popup_98f3bdc9620f20e65ec96332a70e52c0.setContent(html_d54a2f8c44d02803aa2a9810c2c92fab);
+            
+        
+
+        poly_line_aa7fbc564b552b2ec06038f371329db4.bindPopup(popup_98f3bdc9620f20e65ec96332a70e52c0)
+        ;
+
+        
+    
+    
+            poly_line_aa7fbc564b552b2ec06038f371329db4.bindTooltip(
+                `<div>
+                     drone_4 Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_b2d3e3871d5baf1c331dccae8c4617a9 = L.marker(
+                [32.7505, -96.8309],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_db5f5218983bbd73064ffe7688645357 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "exclamation-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5cca736f8044233d97c4d6ef224e5843 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_33160054289b66371af27978dab0e5e6 = $(`<div id="html_33160054289b66371af27978dab0e5e6" style="width: 100.0%; height: 100.0%;">                 <b>Customer 2</b><br>                 Priority: Emergency<br>                 Weight: 0.8 kg<br>                 Vehicle: Drone-4<br>                 Coordinates: 32.7505, -96.8309                 </div>`)[0];
+                popup_5cca736f8044233d97c4d6ef224e5843.setContent(html_33160054289b66371af27978dab0e5e6);
+            
+        
+
+        marker_b2d3e3871d5baf1c331dccae8c4617a9.bindPopup(popup_5cca736f8044233d97c4d6ef224e5843)
+        ;
+
+        
+    
+    
+            marker_b2d3e3871d5baf1c331dccae8c4617a9.bindTooltip(
+                `<div>
+                     Customer 2 (emergency)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b2d3e3871d5baf1c331dccae8c4617a9.setIcon(icon_db5f5218983bbd73064ffe7688645357);
+            
+    
+            var marker_9d14d8ae8f319b56cb11e572b3360dbc = L.marker(
+                [32.8129, -96.7684],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_8572d4c704263b6c1282e7576d3ed54e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b07a906f90ddee2e0debfc79cecefbb9 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a3452c07088688c0cfebe344ed7d3851 = $(`<div id="html_a3452c07088688c0cfebe344ed7d3851" style="width: 100.0%; height: 100.0%;">                 <b>Customer 3</b><br>                 Priority: Prime<br>                 Weight: 1.5 kg<br>                 Vehicle: Drone-4<br>                 Coordinates: 32.8129, -96.7684                 </div>`)[0];
+                popup_b07a906f90ddee2e0debfc79cecefbb9.setContent(html_a3452c07088688c0cfebe344ed7d3851);
+            
+        
+
+        marker_9d14d8ae8f319b56cb11e572b3360dbc.bindPopup(popup_b07a906f90ddee2e0debfc79cecefbb9)
+        ;
+
+        
+    
+    
+            marker_9d14d8ae8f319b56cb11e572b3360dbc.bindTooltip(
+                `<div>
+                     Customer 3 (prime)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9d14d8ae8f319b56cb11e572b3360dbc.setIcon(icon_8572d4c704263b6c1282e7576d3ed54e);
+            
+    
+            var poly_line_60c8df56fa4ac30abc609cc4ca97e26e = L.polyline(
+                [[32.7767, -96.797], [32.7851, -96.8067], [32.7767, -96.797]],
+                {"bubblingMouseEvents": true, "color": "#9467bd", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#9467bd", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+        var popup_5a15e1e53d6de84bc17761cd3500431a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_4ff759f37174878066e5da19df657abc = $(`<div id="html_4ff759f37174878066e5da19df657abc" style="width: 100.0%; height: 100.0%;">             <b>Drone-5</b><br>             Type: 🚁 Drone<br>             Customers: 1<br>             Total Weight: 2.1 kg             </div>`)[0];
+                popup_5a15e1e53d6de84bc17761cd3500431a.setContent(html_4ff759f37174878066e5da19df657abc);
+            
+        
+
+        poly_line_60c8df56fa4ac30abc609cc4ca97e26e.bindPopup(popup_5a15e1e53d6de84bc17761cd3500431a)
+        ;
+
+        
+    
+    
+            poly_line_60c8df56fa4ac30abc609cc4ca97e26e.bindTooltip(
+                `<div>
+                     drone_5 Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_fc51a3b768a659113785aa86f4fb5ba9 = L.marker(
+                [32.7851, -96.8067],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_f13d1d989057bae7a2d7881da0b20f6f = L.AwesomeMarkers.icon(
                 {
   "markerColor": "lightblue",
   "iconColor": "white",
@@ -946,24 +736,267 @@
             );
         
     
-        var popup_71d83299bed8ec5b653bc6e8a2c8dcd6 = L.popup({
+        var popup_40f0d49167e273a8665e64f1ca4df04e = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_09635b9c150d44aaac2a4ab00c8cb4eb = $(`<div id="html_09635b9c150d44aaac2a4ab00c8cb4eb" style="width: 100.0%; height: 100.0%;">                 <b>Customer 9</b><br>                 Priority: Normal<br>                 Weight: 2.8 kg<br>                 Vehicle: Driver-7<br>                 Coordinates: 32.8045, -96.7445                 </div>`)[0];
-                popup_71d83299bed8ec5b653bc6e8a2c8dcd6.setContent(html_09635b9c150d44aaac2a4ab00c8cb4eb);
+                var html_75adc2c0946526b19a76514cf8cae96d = $(`<div id="html_75adc2c0946526b19a76514cf8cae96d" style="width: 100.0%; height: 100.0%;">                 <b>Customer 1</b><br>                 Priority: Normal<br>                 Weight: 2.1 kg<br>                 Vehicle: Drone-5<br>                 Coordinates: 32.7851, -96.8067                 </div>`)[0];
+                popup_40f0d49167e273a8665e64f1ca4df04e.setContent(html_75adc2c0946526b19a76514cf8cae96d);
             
         
 
-        marker_2823264991d35f92b4185351cbfaee94.bindPopup(popup_71d83299bed8ec5b653bc6e8a2c8dcd6)
+        marker_fc51a3b768a659113785aa86f4fb5ba9.bindPopup(popup_40f0d49167e273a8665e64f1ca4df04e)
         ;
 
         
     
     
-            marker_2823264991d35f92b4185351cbfaee94.bindTooltip(
+            marker_fc51a3b768a659113785aa86f4fb5ba9.bindTooltip(
+                `<div>
+                     Customer 1 (normal)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fc51a3b768a659113785aa86f4fb5ba9.setIcon(icon_f13d1d989057bae7a2d7881da0b20f6f);
+            
+    
+            var poly_line_0f2e5acc1ffa6e6c7bac5061e1979a79 = L.polyline(
+                [[32.7767, -96.797], [32.74, -96.775], [32.7767, -96.797]],
+                {"bubblingMouseEvents": true, "color": "#17becf", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#17becf", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+        var popup_345c1861f59d8ae54395138312c96521 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_5b27c29f885542e257164061cd5f0178 = $(`<div id="html_5b27c29f885542e257164061cd5f0178" style="width: 100.0%; height: 100.0%;">             <b>Drone-6</b><br>             Type: 🚁 Drone<br>             Customers: 1<br>             Total Weight: 1.4 kg             </div>`)[0];
+                popup_345c1861f59d8ae54395138312c96521.setContent(html_5b27c29f885542e257164061cd5f0178);
+            
+        
+
+        poly_line_0f2e5acc1ffa6e6c7bac5061e1979a79.bindPopup(popup_345c1861f59d8ae54395138312c96521)
+        ;
+
+        
+    
+    
+            poly_line_0f2e5acc1ffa6e6c7bac5061e1979a79.bindTooltip(
+                `<div>
+                     drone_6 Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_dc1a4b5570f3091acd31b900036e1fd3 = L.marker(
+                [32.74, -96.775],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_535fa33a249f1907a78010fede708c6b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa3f60978384ba0a6df0ee54b02239ec = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1ca45a965df5db837f9d11688cc6344e = $(`<div id="html_1ca45a965df5db837f9d11688cc6344e" style="width: 100.0%; height: 100.0%;">                 <b>Customer 14</b><br>                 Priority: Prime<br>                 Weight: 1.4 kg<br>                 Vehicle: Drone-6<br>                 Coordinates: 32.7400, -96.7750                 </div>`)[0];
+                popup_aa3f60978384ba0a6df0ee54b02239ec.setContent(html_1ca45a965df5db837f9d11688cc6344e);
+            
+        
+
+        marker_dc1a4b5570f3091acd31b900036e1fd3.bindPopup(popup_aa3f60978384ba0a6df0ee54b02239ec)
+        ;
+
+        
+    
+    
+            marker_dc1a4b5570f3091acd31b900036e1fd3.bindTooltip(
+                `<div>
+                     Customer 14 (prime)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dc1a4b5570f3091acd31b900036e1fd3.setIcon(icon_535fa33a249f1907a78010fede708c6b);
+            
+    
+            var poly_line_92646abf16bee6d8f4b0f7133ecc7dcf = L.polyline(
+                [[32.7767, -96.797], [32.815, -96.81], [32.7767, -96.797]],
+                {"bubblingMouseEvents": true, "color": "#1f77b4", "dashArray": "8, 4", "dashOffset": null, "fill": false, "fillColor": "#1f77b4", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+        var popup_0516117d2a1239f9defceee02bd1beea = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_dc0c421b6a158937bcfd7d0c10181269 = $(`<div id="html_dc0c421b6a158937bcfd7d0c10181269" style="width: 100.0%; height: 100.0%;">             <b>Drone-7</b><br>             Type: 🚁 Drone<br>             Customers: 1<br>             Total Weight: 2.0 kg             </div>`)[0];
+                popup_0516117d2a1239f9defceee02bd1beea.setContent(html_dc0c421b6a158937bcfd7d0c10181269);
+            
+        
+
+        poly_line_92646abf16bee6d8f4b0f7133ecc7dcf.bindPopup(popup_0516117d2a1239f9defceee02bd1beea)
+        ;
+
+        
+    
+    
+            poly_line_92646abf16bee6d8f4b0f7133ecc7dcf.bindTooltip(
+                `<div>
+                     drone_7 Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a1eb9406c47c14f79b08937b734bc49b = L.marker(
+                [32.815, -96.81],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_0f54e245b75d50bfe4f648ae33df240d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "user",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_011b44ae1da11aa3ddc6a9df0ed47d7e = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_105cd95b7eb45a2ab9652c1395fdae70 = $(`<div id="html_105cd95b7eb45a2ab9652c1395fdae70" style="width: 100.0%; height: 100.0%;">                 <b>Customer 13</b><br>                 Priority: Normal<br>                 Weight: 2.0 kg<br>                 Vehicle: Drone-7<br>                 Coordinates: 32.8150, -96.8100                 </div>`)[0];
+                popup_011b44ae1da11aa3ddc6a9df0ed47d7e.setContent(html_105cd95b7eb45a2ab9652c1395fdae70);
+            
+        
+
+        marker_a1eb9406c47c14f79b08937b734bc49b.bindPopup(popup_011b44ae1da11aa3ddc6a9df0ed47d7e)
+        ;
+
+        
+    
+    
+            marker_a1eb9406c47c14f79b08937b734bc49b.bindTooltip(
+                `<div>
+                     Customer 13 (normal)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a1eb9406c47c14f79b08937b734bc49b.setIcon(icon_0f54e245b75d50bfe4f648ae33df240d);
+            
+    
+            var poly_line_777f47e11c7881a05b93f9d486b24bd3 = L.polyline(
+                [[32.77689, -96.79608], [32.77695, -96.79588], [32.77772, -96.79615], [32.77792, -96.7962], [32.77799, -96.7961], [32.77802, -96.79599], [32.77806, -96.79593], [32.77834, -96.79469], [32.7773, -96.79433], [32.77715, -96.79425], [32.7769, -96.79397], [32.77585, -96.79273], [32.77502, -96.79177], [32.77477, -96.79158], [32.77391, -96.79108], [32.77399, -96.7908], [32.7744, -96.79036], [32.77448, -96.79019], [32.77451, -96.78986], [32.77459, -96.7885], [32.77464, -96.7881], [32.7746, -96.78799], [32.77471, -96.78745], [32.77491, -96.78678], [32.77515, -96.78617], [32.77547, -96.78559], [32.77573, -96.7852], [32.77593, -96.78493], [32.77631, -96.78452], [32.77801, -96.78284], [32.77833, -96.7825], [32.77869, -96.78208], [32.77905, -96.78161], [32.77931, -96.78118], [32.77948, -96.78086], [32.77974, -96.7802], [32.77991, -96.77953], [32.78002, -96.77871], [32.78035, -96.77459], [32.78052, -96.77285], [32.78065, -96.7723], [32.78088, -96.77164], [32.78116, -96.77109], [32.78143, -96.77066], [32.78182, -96.77021], [32.78223, -96.76983], [32.78274, -96.76948], [32.78461, -96.76839], [32.78531, -96.76788], [32.78589, -96.76735], [32.78644, -96.76678], [32.7886, -96.76422], [32.78911, -96.76353], [32.78952, -96.76286], [32.78977, -96.76237], [32.79003, -96.76177], [32.79033, -96.76095], [32.79048, -96.76044], [32.79064, -96.75963], [32.79076, -96.75877], [32.79079, -96.75835], [32.79071, -96.75822], [32.7906, -96.757], [32.7906, -96.7566], [32.79064, -96.75568], [32.79063, -96.75548], [32.79109, -96.756], [32.79163, -96.75664], [32.79352, -96.75436], [32.79376, -96.75398], [32.79386, -96.75376], [32.79428, -96.75328], [32.8023, -96.74447], [32.80341, -96.7431], [32.80456, -96.74443], [32.80341, -96.7431], [32.80216, -96.74464], [32.79663, -96.7507], [32.79804, -96.75231], [32.79864, -96.75303], [32.79904, -96.75385], [32.79941, -96.75429], [32.79951, -96.75443], [32.79982, -96.75475], [32.80045, -96.75552], [32.8009, -96.75603], [32.80165, -96.75685], [32.80212, -96.75741], [32.80218, -96.7575], [32.80615, -96.7621], [32.80348, -96.76531], [32.80292, -96.76598], [32.80219, -96.76688], [32.79811, -96.7718], [32.79698, -96.77319], [32.79639, -96.77388], [32.79622, -96.77411], [32.79193, -96.77924], [32.7931, -96.78056], [32.79225, -96.78156], [32.79257, -96.78191], [32.79374, -96.78323], [32.79331, -96.78373], [32.79136, -96.78609], [32.78884, -96.78911], [32.78768, -96.7905], [32.78811, -96.79105], [32.78839, -96.7915], [32.78867, -96.7922], [32.78834, -96.79217], [32.78827, -96.79222], [32.78779, -96.79225], [32.78598, -96.79215], [32.78582, -96.79212], [32.78566, -96.79217], [32.7851, -96.79189], [32.78471, -96.7916], [32.78421, -96.79107], [32.78394, -96.79069], [32.78368, -96.79023], [32.78316, -96.78905], [32.78164, -96.78548], [32.78131, -96.78479], [32.78092, -96.78414], [32.78048, -96.78359], [32.77966, -96.78282], [32.77866, -96.78198], [32.77706, -96.78059], [32.77609, -96.77976], [32.77529, -96.77912], [32.77497, -96.7789], [32.7745, -96.77866], [32.77405, -96.7785], [32.77366, -96.7784], [32.77294, -96.77835], [32.77213, -96.77835], [32.7715, -96.77829], [32.77088, -96.77817], [32.77007, -96.77793], [32.76701, -96.77681], [32.76355, -96.77557], [32.76277, -96.77528], [32.7609, -96.77457], [32.75989, -96.77411], [32.75675, -96.77236], [32.75567, -96.77187], [32.75485, -96.77157], [32.75162, -96.77059], [32.75148, -96.77064], [32.74901, -96.77019], [32.74851, -96.77002], [32.74807, -96.7698], [32.74779, -96.76961], [32.74731, -96.76919], [32.74609, -96.76779], [32.74554, -96.76712], [32.74527, -96.76668], [32.74499, -96.76612], [32.74481, -96.76564], [32.74464, -96.76502], [32.74456, -96.76451], [32.74449, -96.76389], [32.74448, -96.76362], [32.74447, -96.76286], [32.74451, -96.76219], [32.74462, -96.76152], [32.74476, -96.76096], [32.74665, -96.75594], [32.74691, -96.75505], [32.74703, -96.75446], [32.74713, -96.75362], [32.74717, -96.75288], [32.74715, -96.7484], [32.74715, -96.74384], [32.74709, -96.74248], [32.7468, -96.74009], [32.74526, -96.72793], [32.74511, -96.72723], [32.74489, -96.72652], [32.74472, -96.72608], [32.74456, -96.72595], [32.74434, -96.72561], [32.74426, -96.72554], [32.74419, -96.72551], [32.74401, -96.72552], [32.74385, -96.72559], [32.74374, -96.72571], [32.74362, -96.72596], [32.74367, -96.72628], [32.74374, -96.72646], [32.74388, -96.72666], [32.74404, -96.72678], [32.74428, -96.72688], [32.74536, -96.72718], [32.74609, -96.72721], [32.74635, -96.72732], [32.74645, -96.72738], [32.74652, -96.72739], [32.74755, -96.72863], [32.74719, -96.72907], [32.747, -96.72922], [32.74678, -96.7293], [32.7462, -96.7294], [32.74603, -96.7295], [32.74589, -96.72965], [32.74579, -96.72987], [32.74578, -96.73026], [32.74573, -96.73038], [32.74715, -96.74159], [32.74724, -96.74249], [32.7473, -96.74346], [32.74732, -96.74841], [32.74727, -96.75304], [32.74724, -96.75367], [32.74715, -96.75451], [32.74701, -96.75524], [32.74686, -96.75587], [32.74661, -96.75663], [32.74609, -96.75813], [32.74516, -96.76074], [32.745, -96.76127], [32.74489, -96.76183], [32.74483, -96.76237], [32.74483, -96.76296], [32.74491, -96.76365], [32.74502, -96.7643], [32.74516, -96.76489], [32.74537, -96.76549], [32.74564, -96.76604], [32.74592, -96.76648], [32.74642, -96.76712], [32.74688, -96.76766], [32.74744, -96.7682], [32.74801, -96.76865], [32.74865, -96.76905], [32.74903, -96.76924], [32.74989, -96.76959], [32.75144, -96.77015], [32.75159, -96.7703], [32.75412, -96.7711], [32.75518, -96.77147], [32.7559, -96.77177], [32.75679, -96.77222], [32.7595, -96.77375], [32.7601, -96.77406], [32.76108, -96.77451], [32.76325, -96.7753], [32.76947, -96.77752], [32.77026, -96.77776], [32.77113, -96.77799], [32.77214, -96.77811], [32.77355, -96.77815], [32.77405, -96.77824], [32.77455, -96.77841], [32.77506, -96.77869], [32.77534, -96.77889], [32.77547, -96.77888], [32.77574, -96.77899], [32.77602, -96.77916], [32.77823, -96.7809], [32.77846, -96.78114], [32.7786, -96.78137], [32.77873, -96.78168], [32.77879, -96.7819], [32.77882, -96.78227], [32.77878, -96.78261], [32.77873, -96.78278], [32.77858, -96.78314], [32.77842, -96.78336], [32.77726, -96.78461], [32.77661, -96.78545], [32.7762, -96.78608], [32.77585, -96.78676], [32.77559, -96.78739], [32.77544, -96.78789], [32.77543, -96.78822], [32.77522, -96.78974], [32.77507, -96.79], [32.77469, -96.79031], [32.77463, -96.79042], [32.77458, -96.79059], [32.77451, -96.79068], [32.77418, -96.79233], [32.77403, -96.79268], [32.77387, -96.79298], [32.7732, -96.79382], [32.77292, -96.79417], [32.77249, -96.79476], [32.77327, -96.79557], [32.77368, -96.79599], [32.77386, -96.79609], [32.77455, -96.79679], [32.7754, -96.79772], [32.77553, -96.79785], [32.77567, -96.79794], [32.77594, -96.79675]],
+                {"bubblingMouseEvents": true, "color": "#e377c2", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#e377c2", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+        var popup_aaafc5331fef1b8eec73449823ea78de = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_404ee86c9b44e0ed1d7680b5e3475257 = $(`<div id="html_404ee86c9b44e0ed1d7680b5e3475257" style="width: 100.0%; height: 100.0%;">             <b>Driver-8</b><br>             Type: 🚗 Driver<br>             Customers: 3<br>             Total Weight: 9.5 kg             </div>`)[0];
+                popup_aaafc5331fef1b8eec73449823ea78de.setContent(html_404ee86c9b44e0ed1d7680b5e3475257);
+            
+        
+
+        poly_line_777f47e11c7881a05b93f9d486b24bd3.bindPopup(popup_aaafc5331fef1b8eec73449823ea78de)
+        ;
+
+        
+    
+    
+            poly_line_777f47e11c7881a05b93f9d486b24bd3.bindTooltip(
+                `<div>
+                     driver_8 Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_eb8c41a1e3817859ba58506f95815dd0 = L.marker(
+                [32.8045, -96.7445],
+                {
+}
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
+        
+    
+            var icon_a497a09e67671852a7360789476338ac = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "lightblue",
+  "iconColor": "white",
+  "icon": "user",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7ee49aea93327da535637e3df814b42f = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_b5859dcb3997ecb9de0bb002e3badd52 = $(`<div id="html_b5859dcb3997ecb9de0bb002e3badd52" style="width: 100.0%; height: 100.0%;">                 <b>Customer 9</b><br>                 Priority: Normal<br>                 Weight: 2.8 kg<br>                 Vehicle: Driver-8<br>                 Coordinates: 32.8045, -96.7445                 </div>`)[0];
+                popup_7ee49aea93327da535637e3df814b42f.setContent(html_b5859dcb3997ecb9de0bb002e3badd52);
+            
+        
+
+        marker_eb8c41a1e3817859ba58506f95815dd0.bindPopup(popup_7ee49aea93327da535637e3df814b42f)
+        ;
+
+        
+    
+    
+            marker_eb8c41a1e3817859ba58506f95815dd0.bindTooltip(
                 `<div>
                      Customer 9 (normal)
                  </div>`,
@@ -973,17 +1006,17 @@
             );
         
     
-                marker_2823264991d35f92b4185351cbfaee94.setIcon(icon_362d82ac1004b929edbf1b3e58cc0b25);
+                marker_eb8c41a1e3817859ba58506f95815dd0.setIcon(icon_a497a09e67671852a7360789476338ac);
             
     
-            var marker_f7fa0a9edb9ff61ae70daa7d887c8a1b = L.marker(
+            var marker_f01466ecfad91cd4b97e259fdbe9ea80 = L.marker(
                 [32.7925, -96.782],
                 {
 }
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var icon_2e57d14970fd58d2a71cecc8a4865d6c = L.AwesomeMarkers.icon(
+            var icon_62374f251afb317664b255e53fead72b = L.AwesomeMarkers.icon(
                 {
   "markerColor": "lightblue",
   "iconColor": "white",
@@ -994,24 +1027,24 @@
             );
         
     
-        var popup_2e2f3712ac004203fcc6938b9f58c932 = L.popup({
+        var popup_b2c211ef94edbba9cd7766a8082a2b22 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_7596b88e96531f654a1528aa6cf2a413 = $(`<div id="html_7596b88e96531f654a1528aa6cf2a413" style="width: 100.0%; height: 100.0%;">                 <b>Customer 11</b><br>                 Priority: Normal<br>                 Weight: 3.5 kg<br>                 Vehicle: Driver-7<br>                 Coordinates: 32.7925, -96.7820                 </div>`)[0];
-                popup_2e2f3712ac004203fcc6938b9f58c932.setContent(html_7596b88e96531f654a1528aa6cf2a413);
+                var html_3a0301cc8f9446048f70ee6fc02a7be9 = $(`<div id="html_3a0301cc8f9446048f70ee6fc02a7be9" style="width: 100.0%; height: 100.0%;">                 <b>Customer 11</b><br>                 Priority: Normal<br>                 Weight: 3.5 kg<br>                 Vehicle: Driver-8<br>                 Coordinates: 32.7925, -96.7820                 </div>`)[0];
+                popup_b2c211ef94edbba9cd7766a8082a2b22.setContent(html_3a0301cc8f9446048f70ee6fc02a7be9);
             
         
 
-        marker_f7fa0a9edb9ff61ae70daa7d887c8a1b.bindPopup(popup_2e2f3712ac004203fcc6938b9f58c932)
+        marker_f01466ecfad91cd4b97e259fdbe9ea80.bindPopup(popup_b2c211ef94edbba9cd7766a8082a2b22)
         ;
 
         
     
     
-            marker_f7fa0a9edb9ff61ae70daa7d887c8a1b.bindTooltip(
+            marker_f01466ecfad91cd4b97e259fdbe9ea80.bindTooltip(
                 `<div>
                      Customer 11 (normal)
                  </div>`,
@@ -1021,17 +1054,17 @@
             );
         
     
-                marker_f7fa0a9edb9ff61ae70daa7d887c8a1b.setIcon(icon_2e57d14970fd58d2a71cecc8a4865d6c);
+                marker_f01466ecfad91cd4b97e259fdbe9ea80.setIcon(icon_62374f251afb317664b255e53fead72b);
             
     
-            var marker_af9ee64c62fda79dacc205e927726500 = L.marker(
+            var marker_b5ac318f8517926c1bda7efe91e86ca1 = L.marker(
                 [32.7473, -96.7484],
                 {
 }
-            ).addTo(map_fc3944abf05f880a9c40401e51531fbc);
+            ).addTo(map_2047be34306793993a79d2f653ad5301);
         
     
-            var icon_18528cd0293f2d85168af2c9984e8f95 = L.AwesomeMarkers.icon(
+            var icon_8ec5d1c539688b694a0eed5697f34d85 = L.AwesomeMarkers.icon(
                 {
   "markerColor": "lightblue",
   "iconColor": "white",
@@ -1042,24 +1075,24 @@
             );
         
     
-        var popup_77fd47492b7a6b5049feea5893364713 = L.popup({
+        var popup_ba953a48f75543cc38633597bbc312e5 = L.popup({
   "maxWidth": 250,
 });
 
         
             
-                var html_b5c671327c7b07b9e0160f0c2160804e = $(`<div id="html_b5c671327c7b07b9e0160f0c2160804e" style="width: 100.0%; height: 100.0%;">                 <b>Customer 4</b><br>                 Priority: Normal<br>                 Weight: 3.2 kg<br>                 Vehicle: Driver-7<br>                 Coordinates: 32.7473, -96.7484                 </div>`)[0];
-                popup_77fd47492b7a6b5049feea5893364713.setContent(html_b5c671327c7b07b9e0160f0c2160804e);
+                var html_f768508cb0f0104532ad5eaf90e6a746 = $(`<div id="html_f768508cb0f0104532ad5eaf90e6a746" style="width: 100.0%; height: 100.0%;">                 <b>Customer 4</b><br>                 Priority: Normal<br>                 Weight: 3.2 kg<br>                 Vehicle: Driver-8<br>                 Coordinates: 32.7473, -96.7484                 </div>`)[0];
+                popup_ba953a48f75543cc38633597bbc312e5.setContent(html_f768508cb0f0104532ad5eaf90e6a746);
             
         
 
-        marker_af9ee64c62fda79dacc205e927726500.bindPopup(popup_77fd47492b7a6b5049feea5893364713)
+        marker_b5ac318f8517926c1bda7efe91e86ca1.bindPopup(popup_ba953a48f75543cc38633597bbc312e5)
         ;
 
         
     
     
-            marker_af9ee64c62fda79dacc205e927726500.bindTooltip(
+            marker_b5ac318f8517926c1bda7efe91e86ca1.bindTooltip(
                 `<div>
                      Customer 4 (normal)
                  </div>`,
@@ -1069,7 +1102,7 @@
             );
         
     
-                marker_af9ee64c62fda79dacc205e927726500.setIcon(icon_18528cd0293f2d85168af2c9984e8f95);
+                marker_b5ac318f8517926c1bda7efe91e86ca1.setIcon(icon_8ec5d1c539688b694a0eed5697f34d85);
             
 </script>
 </html>

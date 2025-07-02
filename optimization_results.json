@@ -37,22 +37,27 @@
       "vehicle_id": "drone_2",
       "vehicle_type": "drone",
       "customers": [
-        3,
-        10
+        5,
+        10,
+        12
       ],
-      "total_weight": 2.7,
+      "total_weight": 2.8000000000000003,
       "route_coordinates": [
         [
           32.7767,
           -96.797
         ],
         [
-          32.8129,
-          -96.7684
+          32.8098,
+          -96.8344
         ],
         [
           32.768,
           -96.829
+        ],
+        [
+          32.755,
+          -96.756
         ],
         [
           32.7767,
@@ -61,12 +66,12 @@
       ],
       "customer_details": [
         {
-          "id": 3,
+          "id": 5,
           "coordinates": [
-            32.8129,
-            -96.7684
+            32.8098,
+            -96.8344
           ],
-          "weight": 1.5,
+          "weight": 1.0,
           "priority": "prime"
         },
         {
@@ -77,6 +82,15 @@
           ],
           "weight": 1.2,
           "priority": "prime"
+        },
+        {
+          "id": 12,
+          "coordinates": [
+            32.755,
+            -96.756
+          ],
+          "weight": 0.6,
+          "priority": "emergency"
         }
       ]
     },
@@ -84,10 +98,57 @@
       "vehicle_id": "drone_3",
       "vehicle_type": "drone",
       "customers": [
-        2,
-        13
+        8,
+        7
       ],
-      "total_weight": 2.8,
+      "total_weight": 2.7,
+      "route_coordinates": [
+        [
+          32.7767,
+          -96.797
+        ],
+        [
+          32.732,
+          -96.802
+        ],
+        [
+          32.789,
+          -96.8156
+        ],
+        [
+          32.7767,
+          -96.797
+        ]
+      ],
+      "customer_details": [
+        {
+          "id": 8,
+          "coordinates": [
+            32.732,
+            -96.802
+          ],
+          "weight": 1.8,
+          "priority": "prime"
+        },
+        {
+          "id": 7,
+          "coordinates": [
+            32.789,
+            -96.8156
+          ],
+          "weight": 0.9,
+          "priority": "emergency"
+        }
+      ]
+    },
+    {
+      "vehicle_id": "drone_4",
+      "vehicle_type": "drone",
+      "customers": [
+        2,
+        3
+      ],
+      "total_weight": 2.3,
       "route_coordinates": [
         [
           32.7767,
@@ -98,8 +159,8 @@
           -96.8309
         ],
         [
-          32.815,
-          -96.81
+          32.8129,
+          -96.7684
         ],
         [
           32.7767,
@@ -117,73 +178,12 @@
           "priority": "emergency"
         },
         {
-          "id": 13,
+          "id": 3,
           "coordinates": [
-            32.815,
-            -96.81
+            32.8129,
+            -96.7684
           ],
-          "weight": 2.0,
-          "priority": "normal"
-        }
-      ]
-    },
-    {
-      "vehicle_id": "drone_4",
-      "vehicle_type": "drone",
-      "customers": [
-        7,
-        12,
-        14
-      ],
-      "total_weight": 2.9,
-      "route_coordinates": [
-        [
-          32.7767,
-          -96.797
-        ],
-        [
-          32.789,
-          -96.8156
-        ],
-        [
-          32.755,
-          -96.756
-        ],
-        [
-          32.74,
-          -96.775
-        ],
-        [
-          32.7767,
-          -96.797
-        ]
-      ],
-      "customer_details": [
-        {
-          "id": 7,
-          "coordinates": [
-            32.789,
-            -96.8156
-          ],
-          "weight": 0.9,
-          "priority": "emergency"
-        },
-        {
-          "id": 12,
-          "coordinates": [
-            32.755,
-            -96.756
-          ],
-          "weight": 0.6,
-          "priority": "emergency"
-        },
-        {
-          "id": 14,
-          "coordinates": [
-            32.74,
-            -96.775
-          ],
-          "weight": 1.4,
+          "weight": 1.5,
           "priority": "prime"
         }
       ]
@@ -225,22 +225,17 @@
       "vehicle_id": "drone_6",
       "vehicle_type": "drone",
       "customers": [
-        8,
-        5
+        14
       ],
-      "total_weight": 2.8,
+      "total_weight": 1.4,
       "route_coordinates": [
         [
           32.7767,
           -96.797
         ],
         [
-          32.732,
-          -96.802
-        ],
-        [
-          32.8098,
-          -96.8344
+          32.74,
+          -96.775
         ],
         [
           32.7767,
@@ -249,27 +244,51 @@
       ],
       "customer_details": [
         {
-          "id": 8,
+          "id": 14,
           "coordinates": [
-            32.732,
-            -96.802
+            32.74,
+            -96.775
           ],
-          "weight": 1.8,
-          "priority": "prime"
-        },
-        {
-          "id": 5,
-          "coordinates": [
-            32.8098,
-            -96.8344
-          ],
-          "weight": 1.0,
+          "weight": 1.4,
           "priority": "prime"
         }
       ]
     },
     {
-      "vehicle_id": "driver_7",
+      "vehicle_id": "drone_7",
+      "vehicle_type": "drone",
+      "customers": [
+        13
+      ],
+      "total_weight": 2.0,
+      "route_coordinates": [
+        [
+          32.7767,
+          -96.797
+        ],
+        [
+          32.815,
+          -96.81
+        ],
+        [
+          32.7767,
+          -96.797
+        ]
+      ],
+      "customer_details": [
+        {
+          "id": 13,
+          "coordinates": [
+            32.815,
+            -96.81
+          ],
+          "weight": 2.0,
+          "priority": "normal"
+        }
+      ]
+    },
+    {
+      "vehicle_id": "driver_8",
       "vehicle_type": "driver",
       "customers": [
         9,
@@ -1495,16 +1514,16 @@
     }
   ],
   "summary": {
-    "total_vehicles": 7,
-    "drone_routes": 6,
+    "total_vehicles": 8,
+    "drone_routes": 7,
     "driver_routes": 1,
     "total_customers": 14,
     "total_weight": 25.3,
-    "efficiency_score": 2.0
+    "efficiency_score": 1.75
   },
   "warehouse": [
     32.7767,
     -96.797
   ],
-  "optimization_timestamp": "2025-07-02T19:59:37.476007"
+  "optimization_timestamp": "2025-07-02T20:04:58.006406"
 }
