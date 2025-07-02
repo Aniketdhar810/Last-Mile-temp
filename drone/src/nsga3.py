@@ -92,22 +92,28 @@ class Nsga3Algo:
         # Initialize Google Maps client if API key is available
         self.gmaps_client = None
         self.use_real_time_data = os.getenv('ENABLE_REAL_TIME_DATA',
-                                            'false').lower() == 'true'
+                                            'true').lower() == 'true'
 
         # Try to use environment variable first, then fallback to hardcoded key
         api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
 
-        if self.use_real_time_data and api_key:
+        if self.use_real_time_data and api_key and api_key != "your_google_maps_api_key_here":
             try:
                 self.gmaps_client = googlemaps.Client(key=api_key)
-                print("✅ Google Maps API initialized - Using real-time data")
-                print(f"📍 API Key: {api_key[:10]}...{api_key[-4:]}")
+                # Test the API with a simple request
+                test_result = self.gmaps_client.geocode("Dallas, TX")
+                if test_result:
+                    print("✅ Google Maps API initialized and tested - Using real-time data")
+                    print(f"📍 API Key: {api_key[:10]}...{api_key[-4:]}")
+                else:
+                    raise Exception("API test failed")
             except Exception as e:
                 print(f"⚠️ Google Maps API failed to initialize: {e}")
                 print("📍 Falling back to simulated distances")
                 self.use_real_time_data = False
         else:
-            print("📍 Using simulated distances (no API key or disabled)")
+            print("📍 Using simulated distances (API not configured or disabled)")
+            print("💡 To enable: Add valid GOOGLE_MAPS_API_KEY to .env file")
             self.use_real_time_data = False
 
         self.warehouse = self.instance['warehouse']
@@ -666,11 +672,11 @@ class Nsga3Algo:
         """Run NSGA-III optimization using pymoo with minimal generations for speed"""
         print("Running NSGA-III optimization...")
 
-        # Run the optimization with minimal generations for very fast execution
+        # Run the optimization with more generations for better accuracy
         res = minimize(
             self.problem,
             self.algorithm,
-            termination=('n_gen', 5),  # Reduced to 5 generations for speed
+            termination=('n_gen', 20),  # Increased to 20 generations for better results
             save_history=False,  # Disable history saving for speed
             verbose=True
         )

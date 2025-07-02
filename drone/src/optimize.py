@@ -13,6 +13,13 @@ def main():
     # Initialize optimizer
     config_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'input.json')
     optimizer = Nsga3Algo(config_path)
+    
+    # Check API status
+    if optimizer.use_real_time_data:
+        print("🌐 Using real-time Google Maps API data")
+    else:
+        print("⚠️ Using simulated distance data (API disabled or failed)")
+        print("💡 To enable real APIs: Set ENABLE_REAL_TIME_DATA=true in .env file")
 
     print(f"Loaded configuration:")
     print(f"- Warehouse: {optimizer.warehouse.coord}")

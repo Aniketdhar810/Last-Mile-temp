@@ -30,21 +30,26 @@ def plot_optimization(results_data, animate=False):
             icon=folium.Icon(color='red', icon='home', prefix='glyphicon')
         ).add_to(m)
 
-        # Enhanced color scheme for different vehicles
-        colors = ['blue', 'green', 'purple', 'orange', 'darkred', 'lightred', 
-                 'beige', 'darkblue', 'darkgreen', 'cadetblue']
+        # Enhanced color scheme for different vehicles - drone vs driver colors
+        drone_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#17becf']
+        driver_colors = ['#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#2ca02c', '#ff7f0e']
 
         # Add routes to map with enhanced details
         for i, route in enumerate(results_data['routes']):
-            color = colors[i % len(colors)]
             vehicle_id = route['vehicle_id']
             vehicle_type = route['vehicle_type']
+            
+            # Choose color based on vehicle type
+            if vehicle_type == 'drone':
+                color = drone_colors[i % len(drone_colors)]
+            else:
+                color = driver_colors[i % len(driver_colors)]
 
-            # Use route_coordinates if available (road-based for drivers), otherwise create direct coordinates
-            if 'route_coordinates' in route and route['route_coordinates']:
+            # Ensure route_coordinates exist and are valid
+            if 'route_coordinates' in route and route['route_coordinates'] and len(route['route_coordinates']) > 1:
                 route_coords = route['route_coordinates']
             else:
-                # Fallback to direct coordinates
+                # Create direct coordinates as fallback
                 route_coords = [warehouse_coord]
                 for customer in route['customer_details']:
                     route_coords.append(customer['coordinates'])
@@ -53,9 +58,9 @@ def plot_optimization(results_data, animate=False):
             # Add route line with vehicle type styling
             line_style = {
                 'color': color,
-                'weight': 3 if vehicle_type == 'drone' else 4,
-                'opacity': 0.7 if vehicle_type == 'drone' else 0.9,
-                'dashArray': '10, 5' if vehicle_type == 'drone' else None
+                'weight': 4 if vehicle_type == 'drone' else 6,
+                'opacity': 0.8 if vehicle_type == 'drone' else 0.9,
+                'dashArray': '8, 4' if vehicle_type == 'drone' else None
             }
 
             route_popup = f"""
@@ -119,8 +124,8 @@ def plot_optimization(results_data, animate=False):
         <p><i class="glyphicon glyphicon-user" style="color:lightblue; margin-right: 5px;"></i>Normal</p>
         <hr style="margin: 8px 0;">
         <p><b>Routes:</b></p>
-        <p><span style="border: 2px dashed blue; padding: 2px 8px;">━━━</span> Drone Routes (Direct)</p>
-        <p><span style="border: 2px solid green; padding: 2px 8px;">━━━</span> Driver Routes (Roads)</p>
+        <p><span style="color: #1f77b4; font-size: 16px;">🚁 ━ ━ ━</span> Drone Routes (Direct Flight)</p>
+        <p><span style="color: #8c564b; font-size: 16px;">🚗 ━━━━━</span> Driver Routes (Road Network)</p>
         <hr style="margin: 8px 0;">
         <p><b>Summary:</b></p>
         <p>Total Vehicles: {results_data['summary']['total_vehicles']}</p>
