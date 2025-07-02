@@ -155,24 +155,28 @@ def create_route_summary(routes, instance):
 
     return summary
 
-def save_optimization_results(routes, instance, filename="optimization_results.json"):
-    """Save optimization results to a JSON file"""
-    geojson = export_geojson(routes, instance)
-    summary = create_route_summary(routes, instance)
+def create_route_summary(routes, instance):
+    """Create a summary of the optimization results"""
+    total_vehicles = len(routes)
+    drone_routes = sum(1 for vehicle_type, _ in routes if vehicle_type == 'drone')
+    driver_routes = sum(1 for vehicle_type, _ in routes if vehicle_type == 'driver')
 
-    results = {
-        'geojson': geojson,
-        'summary': summary,
-        'routes': routes
+    total_customers = sum(len(route) for _, route in routes)
+    total_weight = sum(
+        sum(instance['customers'][f'customer_{c}'].weight for c in route)
+        for _, route in routes
+    )
+
+    summary = {
+        'total_vehicles': total_vehicles,
+        'drone_routes': drone_routes,
+        'driver_routes': driver_routes,
+        'total_customers': total_customers,
+        'total_weight': total_weight,
+        'efficiency_score': total_customers / total_vehicles if total_vehicles > 0 else 0
     }
 
-    with open(filename, 'w') as f:
-        json.dump(results, f, indent=2, default=str)
-
-    return results
-import json
-import folium
-import numpy as np
+    return summary
 
 def plot_optimization(results_data, animate=False):
     """Create an enhanced interactive map visualization of the optimized routes"""
@@ -409,16 +413,7 @@ def calculate_route_distance(coordinates):
         a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
         c = 2 * math.asin(math.sqrt(a))
         total_distance += R * c
-    return total_distancecles': len(routes),
-            'drone_routes': sum(1 for r in routes if r[0] == 'drone'),
-            'driver_routes': sum(1 for r in routes if r[0] == 'driver'),
-            'total_customers': sum(len(r[1]) for r in routes),
-            'total_weight': 0,
-            'efficiency_score': 0
-        },
-        'warehouse': instance['warehouse'].coord,
-        'optimization_timestamp': str(np.datetime64('now'))
-    }
+    return total_distance
 
     total_weight = 0
 

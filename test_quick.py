@@ -24,7 +24,7 @@ def test_imports():
         return True
     except Exception as e:
         print(f"❌ Import error: {e}")
-        return False
+        return Falsern False
 
 def test_optimization():
     """Test the optimization quickly"""
@@ -72,4 +72,4 @@ if __name__ == "__main__":
         print("❌ Optimization test failed!")
         sys.exit(1)
     
-    print("🎉 All tests passed! The system is working correctly!")
+    print("🎉 All tests passed! The system is working correctly!")s working correctly!")

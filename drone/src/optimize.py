@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from .nsga3 import Nsga3Algo
 from .visualize import export_geojson
-from .visualize import plot_optimization, save_optimization_results
+from .visualize import plot_optimization, save_optimization_resultson_results
 import json
 
 def main():
@@ -73,7 +73,7 @@ def main():
     print(f"- Driver routes: {results['summary']['driver_routes']}")
     print(f"- Total customers served: {results['summary']['total_customers']}")
     print(f"- Total weight delivered: {results['summary']['total_weight']:.1f}kg")
-    print(f"- Efficiency score: {results['summary']['efficiency_score']:.2f}")
+    print(f"- Efficiency score: {results['summary']['efficiency_score']:.2f}")e']:.2f}")
 
 if __name__ == "__main__":
     main()
