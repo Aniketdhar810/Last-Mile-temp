@@ -155,29 +155,6 @@ def create_route_summary(routes, instance):
 
     return summary
 
-def create_route_summary(routes, instance):
-    """Create a summary of the optimization results"""
-    total_vehicles = len(routes)
-    drone_routes = sum(1 for vehicle_type, _ in routes if vehicle_type == 'drone')
-    driver_routes = sum(1 for vehicle_type, _ in routes if vehicle_type == 'driver')
-
-    total_customers = sum(len(route) for _, route in routes)
-    total_weight = sum(
-        sum(instance['customers'][f'customer_{c}'].weight for c in route)
-        for _, route in routes
-    )
-
-    summary = {
-        'total_vehicles': total_vehicles,
-        'drone_routes': drone_routes,
-        'driver_routes': driver_routes,
-        'total_customers': total_customers,
-        'total_weight': total_weight,
-        'efficiency_score': total_customers / total_vehicles if total_vehicles > 0 else 0
-    }
-
-    return summary
-
 def plot_optimization(results_data, animate=False):
     """Create an enhanced interactive map visualization of the optimized routes"""
     try:
@@ -415,6 +392,22 @@ def calculate_route_distance(coordinates):
         total_distance += R * c
     return total_distance
 
+    def save_optimization_results(routes, instance, filename):
+    """Save optimization results to JSON file"""
+    results = {
+        'routes': [],
+        'summary': {
+            'total_vehicles': len(routes),
+            'drone_routes': len([r for r in routes if r[0] == 'drone']),
+            'driver_routes': len([r for r in routes if r[0] == 'driver']),
+            'total_customers': sum(len(route) for _, route in routes),
+            'total_weight': 0,
+            'efficiency_score': 0.0
+        },
+        'warehouse': instance['warehouse'].coord,
+        'optimization_timestamp': datetime.datetime.now().isoformat()
+    }
+
     total_weight = 0
 
     for i, (vehicle_type, route) in enumerate(routes):
@@ -431,7 +424,6 @@ def calculate_route_distance(coordinates):
             route_coordinates.append(instance['warehouse'].coord)
         else:
             # Road-based coordinates for drivers
-            # Use the local function instead
             route_coordinates = get_road_route_coordinates_for_save(instance, route)
 
         route_data = {
@@ -455,7 +447,7 @@ def calculate_route_distance(coordinates):
         results['routes'].append(route_data)
 
     results['summary']['total_weight'] = total_weight
-    results['summary']['efficiency_score'] = results['summary']['total_customers'] / results['summary']['total_vehicles']
+    results['summary']['efficiency_score'] = results['summary']['total_customers'] / results['summary']['total_vehicles'] if results['summary']['total_vehicles'] > 0 else 0
 
     # Save to file
     with open(filename, 'w') as f:
