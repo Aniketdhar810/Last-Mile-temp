@@ -31,10 +31,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # API Keys from environment variables
-GMAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY',
-                          "AIzaSyD3zTC_gFdyFK5bD6GebwUQiRox7G8SDso")
-OWM_API_KEY = os.getenv('OPENWEATHER_API_KEY',
-                        "a8481e94c5e2a79564c5029be00a7d26")
+GMAPS_API_KEY = "AIzaSyD3zTC_gFdyFK5bD6GebwUQiRox7G8SDso"
+OWM_API_KEY = "a8481e94c5e2a79564c5029be00a7d26"
 
 
 class DeliveryOptimizationProblem(Problem):
@@ -94,10 +92,10 @@ class Nsga3Algo:
         self.use_real_time_data = os.getenv('ENABLE_REAL_TIME_DATA',
                                             'true').lower() == 'true'
 
-        # Try to use environment variable first, then fallback to hardcoded key
-        api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
+        # Use environment variable first, then fallback to hardcoded key
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY', GMAPS_API_KEY)
 
-        if self.use_real_time_data and api_key and api_key != "your_google_maps_api_key_here":
+        if self.use_real_time_data and api_key:
             try:
                 self.gmaps_client = googlemaps.Client(key=api_key)
                 # Test the API with a simple request
@@ -113,7 +111,10 @@ class Nsga3Algo:
                 self.use_real_time_data = False
         else:
             print("📍 Using simulated distances (API not configured or disabled)")
-            print("💡 To enable: Add valid GOOGLE_MAPS_API_KEY to .env file")
+            print("💡 To enable real APIs:")
+            print("   1. Set GOOGLE_MAPS_API_KEY in .env file")
+            print("   2. Set ENABLE_REAL_TIME_DATA=true in .env file") 
+            print("   3. Enable required APIs in Google Cloud Console")
             self.use_real_time_data = False
 
         self.warehouse = self.instance['warehouse']
@@ -243,7 +244,7 @@ class Nsga3Algo:
             return
 
         # Driver distance matrix using Google Routes API
-        api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY', GMAPS_API_KEY)
         if self.use_real_time_data and api_key:
             try:
                 print("🗺️ Fetching real-time distance data from Google Routes API...")
@@ -775,8 +776,8 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
     """Get road-based coordinates for both drone and driver routes using Google Routes API"""
     try:
         # Initialize API key
-        api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
-        if not api_key:
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY', GMAPS_API_KEY)
+        if not api_key or api_key == "your_google_maps_api_key_here":
             # Fallback to direct coordinates if no API key
             coords = [instance['warehouse'].coord]
             for customer_idx in route:

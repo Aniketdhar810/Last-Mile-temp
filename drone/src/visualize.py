@@ -1,3 +1,5 @@
+# Applying the changes to fix API key usage in visualize.py
+
 import os
 import sys
 import json
@@ -38,7 +40,7 @@ def plot_optimization(results_data, animate=False):
         for i, route in enumerate(results_data['routes']):
             vehicle_id = route['vehicle_id']
             vehicle_type = route['vehicle_type']
-            
+
             # Choose color based on vehicle type
             if vehicle_type == 'drone':
                 color = drone_colors[i % len(drone_colors)]
@@ -247,13 +249,11 @@ def get_road_route_coordinates_for_save(instance, route):
         import requests
         import os
 
-        # Get API key
-        api_key = os.getenv('GOOGLE_MAPS_API_KEY')
-        if not api_key:
-            # Try hardcoded key as fallback
-            api_key = "AIzaSyD3zTC_gFdyFK5bD6GebwUQiRox7G8SDso"
+        # Load API key
+        GMAPS_API_KEY = "AIzaSyD3zTC_gFdyFK5bD6GebwUQiRox7G8SDso"
+        api_key = os.getenv('GOOGLE_MAPS_API_KEY', GMAPS_API_KEY)
+        if not api_key or api_key == "your_google_maps_api_key_here":
 
-        if not api_key:
             # Fallback to direct coordinates if no API key
             coords = [instance['warehouse'].coord]
             for customer_idx in route:
