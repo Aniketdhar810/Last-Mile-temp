@@ -23,7 +23,7 @@ from pymoo.operators.mutation.inversion import InversionMutation
 from pymoo.operators.sampling.rnd import PermutationRandomSampling
 
 # Import data models
-from ..data_models import Warehouse, Drone, Driver, Order
+from drone.data_models import Warehouse, Drone, Driver, Order
 
 # Load environment variables
 from dotenv import load_dotenv
@@ -730,16 +730,8 @@ def export_geojson(routes, instance):
     features = []
 
     for idx, (vehicle_type, route) in enumerate(routes):
-        if vehicle_type == 'drone':
-            # Direct coordinates for drones (straight line)
-            coords = [instance['warehouse'].coord]
-            for customer_idx in route:
-                customer = instance['customers'][f'customer_{customer_idx}']
-                coords.append([customer.lat, customer.lon])
-            coords.append(instance['warehouse'].coord)
-        else:
-            # Road-based routing for drivers
-            coords = get_road_route_coordinates(instance, route)
+        # Use road-based routing for both drones and drivers
+        coords = get_road_route_coordinates(instance, route, vehicle_type)
 
         features.append({
             "type": "Feature",
@@ -765,8 +757,8 @@ def export_geojson(routes, instance):
     }
 
 
-def get_road_route_coordinates(instance, route):
-    """Get road-based coordinates for driver routes using Google Routes API"""
+def get_road_route_coordinates(instance, route, vehicle_type='driver'):
+    """Get road-based coordinates for both drone and driver routes using Google Routes API"""
     try:
         # Initialize API key
         api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
@@ -791,16 +783,20 @@ def get_road_route_coordinates(instance, route):
             destination = {"location": {"latLng": {"latitude": instance['warehouse'].coord[0], "longitude": instance['warehouse'].coord[1]}}}
             
             # Prepare the request for Routes API
+            # Use different routing preferences for drones vs drivers
+            travel_mode = "DRIVE" if vehicle_type == 'driver' else "DRIVE"  # Google API doesn't have drone mode, use optimized driving
+            routing_preference = "TRAFFIC_AWARE_OPTIMAL" if vehicle_type == 'driver' else "TRAFFIC_UNAWARE"
+            
             request_body = {
                 "origin": origin,
                 "destination": destination,
-                "travelMode": "DRIVE",
-                "routingPreference": "TRAFFIC_AWARE_OPTIMAL",
+                "travelMode": travel_mode,
+                "routingPreference": routing_preference,
                 "computeAlternativeRoutes": False,
                 "routeModifiers": {
-                    "avoidTolls": False,
-                    "avoidHighways": False,
-                    "avoidFerries": False
+                    "avoidTolls": vehicle_type == 'drone',  # Drones avoid tolls (highways)
+                    "avoidHighways": vehicle_type == 'drone',  # Drones prefer shorter routes
+                    "avoidFerries": True
                 },
                 "languageCode": "en-US",
                 "units": "METRIC"

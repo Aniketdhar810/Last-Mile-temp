@@ -334,7 +334,8 @@ def save_optimization_results(routes, instance, filename):
             route_coordinates.append(instance['warehouse'].coord)
         else:
             # Road-based coordinates for drivers
-            route_coordinates = get_road_route_coordinates_for_save(instance, route)
+            from .nsga3 import get_road_route_coordinates
+            route_coordinates = get_road_route_coordinates(instance, route, vehicle_type)oordinates_for_save(instance, route)
 
         route_data = {
             'vehicle_id': f"{vehicle_type}_{i+1}",
