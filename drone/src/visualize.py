@@ -9,152 +9,6 @@ import numpy as np
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-def plot_optimization(geojson_data, animate=True):
-    """Create an interactive map visualization of the optimization results"""
-
-    # Get warehouse coordinates
-    warehouse_coord = geojson_data['properties']['warehouse']
-
-    # Create base map centered on warehouse
-    m = folium.Map(
-        location=warehouse_coord,
-        zoom_start=12,
-        tiles='OpenStreetMap'
-    )
-
-    # Add warehouse marker
-    folium.Marker(
-        warehouse_coord,
-        popup="Walmart Warehouse",
-        tooltip="Warehouse",
-        icon=folium.Icon(color='red', icon='home', prefix='fa')
-    ).add_to(m)
-
-    # Color map for different routes
-    colors = ['blue', 'green', 'purple', 'orange', 'darkred', 'lightred', 
-              'beige', 'darkblue', 'darkgreen', 'cadetblue', 'darkpurple', 'white', 'pink', 'lightblue', 'lightgreen', 'gray', 'black', 'lightgray']
-
-    # Add routes to the map
-    for idx, feature in enumerate(geojson_data['features']):
-        route_coords = feature['geometry']['coordinates']
-        vehicle_info = feature['properties']
-        color = colors[idx % len(colors)]
-
-        # Create route line
-        if animate and vehicle_info['vehicle_type'] == 'drone':
-            # Animated path for drones
-            AntPath(
-                locations=route_coords,
-                color=color,
-                weight=4,
-                opacity=0.8,
-                delay=1000,
-                dash_array=[10, 20],
-                popup=f"{vehicle_info['vehicle']} - Weight: {vehicle_info['capacity_used']:.1f}kg"
-            ).add_to(m)
-        else:
-            # Regular path for drivers
-            folium.PolyLine(
-                locations=route_coords,
-                color=color,
-                weight=3,
-                opacity=0.8,
-                popup=f"{vehicle_info['vehicle']} - Weight: {vehicle_info['capacity_used']:.1f}kg"
-            ).add_to(m)
-
-        # Add customer markers
-        for i, coord in enumerate(route_coords[1:-1], 1):  # Skip warehouse start/end
-            customer_id = f"customer_{vehicle_info['route_customers'][i-1]}"
-            icon_color = 'lightblue' if vehicle_info['vehicle_type'] == 'drone' else 'orange'
-
-            folium.CircleMarker(
-                location=coord,
-                radius=8,
-                popup=f"Customer {vehicle_info['route_customers'][i-1]}",
-                tooltip=f"C{vehicle_info['route_customers'][i-1]}",
-                fillColor=icon_color,
-                color='black',
-                weight=1,
-                fillOpacity=0.8
-            ).add_to(m)
-
-    # Add legend
-    legend_html = '''
-    <div style="position: fixed; 
-                bottom: 50px; left: 50px; width: 200px; height: 120px; 
-                background-color: white; border:2px solid grey; z-index:9999; 
-                font-size:14px; padding: 10px">
-    <p><b>Last-Mile Delivery Routes</b></p>
-    <p><i class="fa fa-home" style="color:red"></i> Warehouse</p>
-    <p><i class="fa fa-circle" style="color:lightblue"></i> Drone Customers</p>
-    <p><i class="fa fa-circle" style="color:orange"></i> Driver Customers</p>
-    <p><span style="color:blue">━━━</span> Drone Routes (Animated)</p>
-    <p><span style="color:green">━━━</span> Driver Routes</p>
-    </div>
-    '''
-    m.get_root().html.add_child(folium.Element(legend_html))
-
-    return m
-
-def export_geojson(routes, instance):
-    """Export routes to GeoJSON format for visualization"""
-    features = []
-
-    for idx, (vehicle_type, route) in enumerate(routes):
-        coords = [instance['warehouse'].coord]
-
-        for customer_idx in route:
-            customer = instance['customers'][f'customer_{customer_idx}']
-            coords.append([customer.lat, customer.lon])
-
-        coords.append(instance['warehouse'].coord)
-
-        features.append({
-            "type": "Feature",
-            "properties": {
-                "vehicle": f"{vehicle_type.title()}-{idx+1}",
-                "vehicle_type": vehicle_type,
-                "capacity_used": sum(instance['customers'][f'customer_{c}'].weight for c in route),
-                "route_customers": route
-            },
-            "geometry": {
-                "type": "LineString",
-                "coordinates": coords
-            }
-        })
-
-    return {
-        "type": "FeatureCollection",
-        "features": features,
-        "properties": {
-            "warehouse": instance['warehouse'].coord,
-            "optimization_date": datetime.datetime.now().isoformat()
-        }
-    }
-
-def create_route_summary(routes, instance):
-    """Create a summary of the optimization results"""
-    total_vehicles = len(routes)
-    drone_routes = sum(1 for vehicle_type, _ in routes if vehicle_type == 'drone')
-    driver_routes = sum(1 for vehicle_type, _ in routes if vehicle_type == 'driver')
-
-    total_customers = sum(len(route) for _, route in routes)
-    total_weight = sum(
-        sum(instance['customers'][f'customer_{c}'].weight for c in route)
-        for _, route in routes
-    )
-
-    summary = {
-        'total_vehicles': total_vehicles,
-        'drone_routes': drone_routes,
-        'driver_routes': driver_routes,
-        'total_customers': total_customers,
-        'total_weight': total_weight,
-        'efficiency_score': total_customers / total_vehicles if total_vehicles > 0 else 0
-    }
-
-    return summary
-
 def plot_optimization(results_data, animate=False):
     """Create an enhanced interactive map visualization of the optimized routes"""
     try:
@@ -328,79 +182,6 @@ def save_optimization_results(routes, instance, filename):
             'drone_routes': len([r for r in routes if r[0] == 'drone']),
             'driver_routes': len([r for r in routes if r[0] == 'driver']),
             'total_customers': sum(len(route) for _, route in routes),
-            'total_weight': sum(sum(instance['customers'][f'customer_{c}'].weight for c in route) for _, route in routes),
-            'efficiency_score': 0.0
-        }
-    }
-
-    # Process each route
-    for i, (vehicle_type, route) in enumerate(routes):
-        if vehicle_type == 'drone':
-            # Direct line coordinates for drones
-            route_coordinates = [instance['warehouse'].coord]
-            for customer_idx in route:
-                customer = instance['customers'][f'customer_{customer_idx}']
-                route_coordinates.append([customer.lat, customer.lon])
-            route_coordinates.append(instance['warehouse'].coord)
-        else:
-            # Road-based coordinates for drivers
-            # Use the local function instead
-            route_coordinates = get_road_route_coordinates_for_save(instance, route)
-
-        route_data = {
-            'vehicle_id': f"{vehicle_type}_{i+1}",
-            'vehicle_type': vehicle_type,
-            'customers': route,
-            'coordinates': route_coordinates,
-            'total_weight': sum(instance['customers'][f'customer_{c}'].weight for c in route),
-            'total_distance': calculate_route_distance(route_coordinates)
-        }
-        results['routes'].append(route_data)
-
-    # Calculate efficiency score
-    total_distance = sum(r['total_distance'] for r in results['routes'])
-    results['summary']['efficiency_score'] = max(0, 100 - (total_distance * 2 + len(routes) * 10))
-
-    # Save to file
-    with open(filename, 'w') as f:
-        json.dump(results, f, indent=2)
-
-    return results
-
-def get_road_route_coordinates_for_save(instance, route):
-    """Get simplified road coordinates for saving"""
-    coords = [instance['warehouse'].coord]
-    for customer_idx in route:
-        customer = instance['customers'][f'customer_{customer_idx}']
-        coords.append([customer.lat, customer.lon])
-    coords.append(instance['warehouse'].coord)
-    return coords
-
-def calculate_route_distance(coordinates):
-    """Calculate total distance for a route"""
-    total_distance = 0
-    for i in range(len(coordinates) - 1):
-        lat1, lon1 = coordinates[i]
-        lat2, lon2 = coordinates[i + 1]
-        # Simple Haversine distance calculation
-        import math
-        R = 6371
-        dlat = math.radians(lat2 - lat1)
-        dlon = math.radians(lon2 - lon1)
-        a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
-        c = 2 * math.asin(math.sqrt(a))
-        total_distance += R * c
-    return total_distance
-
-    def save_optimization_results(routes, instance, filename):
-    """Save optimization results to JSON file"""
-    results = {
-        'routes': [],
-        'summary': {
-            'total_vehicles': len(routes),
-            'drone_routes': len([r for r in routes if r[0] == 'drone']),
-            'driver_routes': len([r for r in routes if r[0] == 'driver']),
-            'total_customers': sum(len(route) for _, route in routes),
             'total_weight': 0,
             'efficiency_score': 0.0
         },
@@ -454,7 +235,6 @@ def calculate_route_distance(coordinates):
         json.dump(results, f, indent=2)
 
     return results
-
 
 def get_road_route_coordinates_for_save(instance, route):
     """Get road-based coordinates for driver routes using Google Routes API"""
@@ -563,7 +343,6 @@ def get_road_route_coordinates_for_save(instance, route):
         coords.append(instance['warehouse'].coord)
         return coords
 
-
 def decode_polyline_for_save(polyline_str):
     """Decode Google Maps polyline string to coordinates"""
     coords = []
@@ -603,3 +382,19 @@ def decode_polyline_for_save(polyline_str):
         coords.append([lat / 1e5, lng / 1e5])
 
     return coords
+
+def calculate_route_distance(coordinates):
+    """Calculate total distance for a route"""
+    total_distance = 0
+    for i in range(len(coordinates) - 1):
+        lat1, lon1 = coordinates[i]
+        lat2, lon2 = coordinates[i + 1]
+        # Simple Haversine distance calculation
+        import math
+        R = 6371
+        dlat = math.radians(lat2 - lat1)
+        dlon = math.radians(lon2 - lon1)
+        a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon/2)**2
+        c = 2 * math.asin(math.sqrt(a))
+        total_distance += R * c
+    return total_distance

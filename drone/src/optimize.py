@@ -3,8 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from .nsga3 import Nsga3Algo
-from .visualize import export_geojson
-from .visualize import plot_optimization, save_optimization_resultson_results
+from .visualize import export_geojson, plot_optimization, save_optimization_results
 import json
 
 def main():

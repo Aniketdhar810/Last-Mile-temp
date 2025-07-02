@@ -39,11 +39,11 @@ OWM_API_KEY = os.getenv('OPENWEATHER_API_KEY',
 
 class DeliveryOptimizationProblem(Problem):
     """PyMoo Problem class for NSGA-III optimization"""
-    
+
     def __init__(self, nsga_algo):
         self.nsga_algo = nsga_algo
         n_customers = nsga_algo.instance['num_customers']
-        
+
         super().__init__(
             n_var=n_customers,
             n_obj=3,  # Three objectives: vehicles, cost, energy
@@ -52,28 +52,28 @@ class DeliveryOptimizationProblem(Problem):
             xu=np.full(n_customers, n_customers-1),
             type_var=int
         )
-    
+
     def _evaluate(self, X, out, *args, **kwargs):
         """Evaluate population using NSGA-III objectives"""
         objectives = []
-        
+
         for individual in X:
             # Convert to list and convert 0-based to 1-based indexing
             ind_list = [int(x) + 1 for x in individual.tolist()]
-            
+
             # Ensure all values are in valid range [1, n_customers]
             n_customers = self.nsga_algo.instance['num_customers']
             ind_list = [max(1, min(n_customers, x)) for x in ind_list]
-            
+
             # Create a proper permutation if not valid
             if not self.nsga_algo.validate_individual(ind_list):
                 ind_list = list(range(1, n_customers + 1))
                 np.random.shuffle(ind_list)
-            
+
             # Evaluate using existing evaluation function
             obj_values = self.nsga_algo.evaluate_individual(ind_list)
             objectives.append(obj_values)
-        
+
         out["F"] = np.array(objectives)
 
 
@@ -84,7 +84,7 @@ class Nsga3Algo:
             config = json.load(f)
 
         self.instance = self.parse_config(config)
-        
+
         # Cache directory for distance matrices
         self.cache_dir = os.path.join(os.path.dirname(__file__), '..', 'cache')
         os.makedirs(self.cache_dir, exist_ok=True)
@@ -109,7 +109,7 @@ class Nsga3Algo:
         else:
             print("📍 Using simulated distances (no API key or disabled)")
             self.use_real_time_data = False
-        
+
         self.warehouse = self.instance['warehouse']
         self.drones = self.instance['drones']
         self.drivers = self.instance['drivers']
@@ -217,7 +217,7 @@ class Nsga3Algo:
 
         n = len(locations)
         cache_key = self.get_cache_key(locations)
-        
+
         # Try to load from cache first
         cached_data = self.load_cached_matrix(cache_key)
         if cached_data:
@@ -234,12 +234,12 @@ class Nsga3Algo:
         if self.use_real_time_data and api_key:
             try:
                 print("🗺️ Fetching real-time distance data from Google Routes API...")
-                
+
                 self.driver_distance_matrix = np.zeros((n, n))
                 self.driver_time_matrix = np.zeros((n, n))
 
                 success_count = 0
-                
+
                 # Use Routes API for distance matrix calculation
                 for i in range(n):
                     for j in range(n):
@@ -247,7 +247,7 @@ class Nsga3Algo:
                             try:
                                 origin = {"location": {"latLng": {"latitude": locations[i][0], "longitude": locations[i][1]}}}
                                 destination = {"location": {"latLng": {"latitude": locations[j][0], "longitude": locations[j][1]}}}
-                                
+
                                 request_body = {
                                     "origin": origin,
                                     "destination": destination,
@@ -257,23 +257,23 @@ class Nsga3Algo:
                                     "languageCode": "en-US",
                                     "units": "METRIC"
                                 }
-                                
+
                                 url = "https://routes.googleapis.com/directions/v2:computeRoutes"
                                 headers = {
                                     "Content-Type": "application/json",
                                     "X-Goog-Api-Key": api_key,
                                     "X-Goog-FieldMask": "routes.duration,routes.distanceMeters"
                                 }
-                                
+
                                 response = requests.post(url, json=request_body, headers=headers)
-                                
+
                                 if response.status_code == 200:
                                     result = response.json()
                                     if result.get('routes'):
                                         route = result['routes'][0]
                                         distance_meters = route.get('distanceMeters', 0)
                                         duration_seconds = route.get('duration', '0s').rstrip('s')
-                                        
+
                                         self.driver_distance_matrix[i][j] = distance_meters / 1000  # Convert to km
                                         self.driver_time_matrix[i][j] = float(duration_seconds) / 60 if duration_seconds.replace('.', '').isdigit() else 0  # Convert to minutes
                                         success_count += 1
@@ -291,7 +291,7 @@ class Nsga3Algo:
                                     dist = self.haversine_distance(lat1, lon1, lat2, lon2)
                                     self.driver_distance_matrix[i][j] = dist
                                     self.driver_time_matrix[i][j] = dist * 2
-                                    
+
                             except Exception as route_error:
                                 # Fallback to Euclidean distance for any exception
                                 lat1, lon1 = locations[i]
@@ -368,10 +368,10 @@ class Nsga3Algo:
         """Setup NSGA-III algorithm with optimized parameters for fast execution"""
         # Create reference directions for 3 objectives - reduced partitions for speed
         self.ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=4)
-        
+
         # Create the problem
         self.problem = DeliveryOptimizationProblem(self)
-        
+
         # Create NSGA-III algorithm with optimized parameters for speed
         self.algorithm = NSGA3(
             ref_dirs=self.ref_dirs,
@@ -388,12 +388,12 @@ class Nsga3Algo:
             return False
 
         drone = self.drones[drone_idx]
-        
+
         # Validate all customer indices exist in the customers dictionary
         for c in customer_indices:
             if f'customer_{c}' not in self.customers:
                 return False
-        
+
         total_weight = sum(self.customers[f'customer_{c}'].weight
                            for c in customer_indices)
 
@@ -440,28 +440,28 @@ class Nsga3Algo:
         """Split individual into feasible routes for drones and drivers"""
         routes = []
         remaining_customers = [c for c in individual.copy() if f'customer_{c}' in self.customers]
-        
+
         if not remaining_customers:
             return routes
 
         # Ensure all customers are processed
         attempts = 0
         max_attempts = len(remaining_customers) * 2
-        
+
         while remaining_customers and attempts < max_attempts:
             attempts += 1
             initial_count = len(remaining_customers)
-            
+
             # Try to create drone routes for light packages
             drone_route = []
             max_drone_capacity = 3.0  # Max weight for drone route
             current_weight = 0
-            
+
             for customer in remaining_customers.copy():
                 if f'customer_{customer}' not in self.customers:
                     remaining_customers.remove(customer)
                     continue
-                    
+
                 customer_weight = self.customers[f'customer_{customer}'].weight
                 if (len(drone_route) < 3 and 
                     current_weight + customer_weight <= max_drone_capacity and
@@ -483,7 +483,7 @@ class Nsga3Algo:
                 if f'customer_{customer}' not in self.customers:
                     remaining_customers.remove(customer)
                     continue
-                    
+
                 customer_weight = self.customers[f'customer_{customer}'].weight
                 if (len(driver_route) < 6 and 
                     current_weight + customer_weight <= max_driver_capacity):
@@ -497,7 +497,7 @@ class Nsga3Algo:
                 # Force assignment to avoid infinite loop
                 customer = remaining_customers.pop(0)
                 routes.append(('driver', [customer]))
-            
+
             # If no progress made, force assign remaining customers
             if len(remaining_customers) == initial_count and remaining_customers:
                 customer = remaining_customers.pop(0)
@@ -509,7 +509,7 @@ class Nsga3Algo:
         """Simplified route splitting for display purposes only"""
         routes = []
         remaining = individual.copy()
-        
+
         # Simple greedy assignment
         while remaining:
             # Try drone route (max 3 light customers)
@@ -520,16 +520,16 @@ class Nsga3Algo:
                     self.customers[f'customer_{customer}'].weight <= 2.0):
                     drone_route.append(customer)
                     remaining.remove(customer)
-            
+
             if drone_route:
                 routes.append(('drone', drone_route))
-            
+
             # Assign remaining to driver (max 5 customers)
             if remaining:
                 driver_route = remaining[:5]
                 remaining = remaining[5:]
                 routes.append(('driver', driver_route))
-        
+
         return routes
 
     def evaluate_individual(self, individual):
@@ -539,21 +539,21 @@ class Nsga3Algo:
 
         # Quick estimation instead of complex route splitting
         n_customers = len(individual)
-        
+
         # Objective 1: Estimate vehicles needed (simple heuristic)
         total_weight = sum(self.customers[f'customer_{c}'].weight 
                           for c in individual if f'customer_{c}' in self.customers)
-        
+
         # Estimate drone routes (light packages)
         light_customers = [c for c in individual 
                           if f'customer_{c}' in self.customers and 
                           self.customers[f'customer_{c}'].weight <= 2.0]
         drone_routes = max(1, len(light_customers) // 3)  # 3 customers per drone max
-        
+
         # Remaining go to drivers
         heavy_customers = n_customers - len(light_customers)
         driver_routes = max(1, heavy_customers // 5)  # 5 customers per driver max
-        
+
         obj1 = (drone_routes + driver_routes) / 8.0  # Normalize by max vehicles
 
         # Objective 2: Simple cost estimation
@@ -565,7 +565,7 @@ class Nsga3Algo:
         priority_penalty = sum(1.0 for c in individual 
                              if f'customer_{c}' in self.customers and 
                              self.customers[f'customer_{c}'].priority in ['emergency', 'prime'])
-        
+
         estimated_energy = total_weight * 10 + total_distance * 5 + priority_penalty * 20
         obj3 = estimated_energy / 500.0  # Normalize
 
@@ -665,7 +665,7 @@ class Nsga3Algo:
     def run_optimization(self):
         """Run NSGA-III optimization using pymoo with minimal generations for speed"""
         print("Running NSGA-III optimization...")
-        
+
         # Run the optimization with minimal generations for very fast execution
         res = minimize(
             self.problem,
@@ -674,9 +674,9 @@ class Nsga3Algo:
             save_history=False,  # Disable history saving for speed
             verbose=True
         )
-        
+
         print(f"Optimization completed! Found {len(res.F)} Pareto optimal solutions")
-        
+
         # Print detailed analysis of solutions
         print(f"\nPareto Front Analysis:")
         for i, (x, f) in enumerate(zip(res.X[:3], res.F[:3])):  # Show first 3 solutions only
@@ -685,44 +685,44 @@ class Nsga3Algo:
             individual = [int(val)+1 for val in x]
             routes = self.split_into_routes_simple(individual)
             print(f"  Routes: {[(vtype, len(route)) for vtype, route in routes]}")
-        
+
         # Convert results back to the expected format
         pareto_front = []
-        
+
         for i, (x, f) in enumerate(zip(res.X, res.F)):
             # Create a simple object to mimic the old individual structure
             class Individual:
                 def __init__(self, genes, fitness):
                     self.genes = genes
                     self.fitness = MockFitness(fitness)
-                
+
                 def __iter__(self):
                     return iter(self.genes)
-                
+
                 def __getitem__(self, key):
                     return self.genes[key]
-                
+
                 def __len__(self):
                     return len(self.genes)
-                
+
                 def copy(self):
                     return list(self.genes)
-            
+
             class MockFitness:
                 def __init__(self, values):
                     self.values = tuple(values)
-            
+
             individual = Individual(x.tolist(), f)
             pareto_front.append(individual)
-        
+
         # Create mock logbook and population for compatibility
         class MockLogbook:
             def __init__(self):
                 pass
-        
+
         logbook = MockLogbook()
         population = pareto_front
-        
+
         return pareto_front, population, logbook
 
 
@@ -771,23 +771,23 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
                 coords.append([customer.lat, customer.lon])
             coords.append(instance['warehouse'].coord)
             return coords
-        
+
         # Create waypoints for the route
         waypoints = []
         for customer_idx in route:
             customer = instance['customers'][f'customer_{customer_idx}']
             waypoints.append({"location": {"latLng": {"latitude": customer.lat, "longitude": customer.lon}}})
-        
+
         if len(waypoints) > 0:
             # Create origin and destination (both warehouse)
             origin = {"location": {"latLng": {"latitude": instance['warehouse'].coord[0], "longitude": instance['warehouse'].coord[1]}}}
             destination = {"location": {"latLng": {"latitude": instance['warehouse'].coord[0], "longitude": instance['warehouse'].coord[1]}}}
-            
+
             # Prepare the request for Routes API
             # Use different routing preferences for drones vs drivers
             travel_mode = "DRIVE" if vehicle_type == 'driver' else "DRIVE"  # Google API doesn't have drone mode, use optimized driving
             routing_preference = "TRAFFIC_AWARE_OPTIMAL" if vehicle_type == 'driver' else "TRAFFIC_UNAWARE"
-            
+
             request_body = {
                 "origin": origin,
                 "destination": destination,
@@ -802,7 +802,7 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
                 "languageCode": "en-US",
                 "units": "METRIC"
             }
-            
+
             # Add intermediate waypoints if more than one customer
             if len(waypoints) > 1:
                 request_body["intermediates"] = waypoints
@@ -810,7 +810,7 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
                 # For single customer, make it the destination
                 request_body["destination"] = waypoints[0]
                 # Add return to warehouse as separate request
-            
+
             # Call Routes API
             url = f"https://routes.googleapis.com/directions/v2:computeRoutes"
             headers = {
@@ -818,15 +818,15 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
                 "X-Goog-Api-Key": api_key,
                 "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline"
             }
-            
+
             response = requests.post(url, json=request_body, headers=headers)
-            
+
             if response.status_code == 200:
                 result = response.json()
                 if result.get('routes'):
                     encoded_polyline = result['routes'][0]['polyline']['encodedPolyline']
                     coords = decode_polyline(encoded_polyline)
-                    
+
                     # For single customer, add return trip
                     if len(waypoints) == 1:
                         return_request = {
@@ -835,7 +835,7 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
                             "travelMode": "DRIVE",
                             "routingPreference": "TRAFFIC_AWARE_OPTIMAL"
                         }
-                        
+
                         return_response = requests.post(url, json=return_request, headers=headers)
                         if return_response.status_code == 200:
                             return_result = return_response.json()
@@ -843,7 +843,7 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
                                 return_polyline = return_result['routes'][0]['polyline']['encodedPolyline']
                                 return_coords = decode_polyline(return_polyline)
                                 coords.extend(return_coords[1:])  # Skip first point to avoid duplication
-                    
+
                     return coords
                 else:
                     raise Exception("No routes found in API response")
@@ -852,7 +852,7 @@ def get_road_route_coordinates(instance, route, vehicle_type='driver'):
         else:
             # No customers in route
             return [instance['warehouse'].coord, instance['warehouse'].coord]
-            
+
     except Exception as e:
         print(f"Warning: Failed to get road route coordinates using Routes API: {e}")
         print("Falling back to direct coordinates for driver route")
@@ -871,7 +871,7 @@ def decode_polyline(polyline_str):
     index = 0
     lat = 0
     lng = 0
-    
+
     while index < len(polyline_str):
         # Decode latitude
         shift = 0
@@ -883,10 +883,10 @@ def decode_polyline(polyline_str):
             shift += 5
             if byte < 0x20:
                 break
-        
+
         dlat = ~(result >> 1) if result & 1 else result >> 1
         lat += dlat
-        
+
         # Decode longitude
         shift = 0
         result = 0
@@ -897,10 +897,10 @@ def decode_polyline(polyline_str):
             shift += 5
             if byte < 0x20:
                 break
-        
+
         dlng = ~(result >> 1) if result & 1 else result >> 1
         lng += dlng
-        
+
         coords.append([lat / 1e5, lng / 1e5])
-    
+
     return coords
