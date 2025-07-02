@@ -126,9 +126,16 @@ class Nsga3Algo:
         self.gmaps_api_key = os.getenv('GOOGLE_MAPS_API_KEY') or GMAPS_API_KEY
         self.owm_api_key = os.getenv('OPENWEATHER_API_KEY') or OWM_API_KEY
 
-        # Initialize Google Maps API client
-        self.gmaps = self.gmaps_client or googlemaps.Client(
-            key=self.gmaps_api_key)
+        # Initialize Google Maps API client only if using real-time data
+        self.gmaps = None
+        if self.use_real_time_data and self.gmaps_client:
+            self.gmaps = self.gmaps_client
+        elif self.use_real_time_data and self.gmaps_api_key and self.gmaps_api_key != "your_google_maps_api_key_here":
+            try:
+                self.gmaps = googlemaps.Client(key=self.gmaps_api_key)
+            except Exception as e:
+                print(f"⚠️ Failed to initialize Google Maps client: {e}")
+                self.gmaps = None
 
         # Calculate distance matrices with caching
         self.calculate_distance_matrices()
