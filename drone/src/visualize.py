@@ -302,6 +302,42 @@ def plot_optimization(results_data, animate=False):
         # Return a simple map centered on Dallas if visualization fails
         return folium.Map(location=[32.7767, -96.7970], zoom_start=12)
 
+def export_geojson(routes, instance):
+    """Export routes to GeoJSON format for visualization"""
+    features = []
+    
+    for idx, (vehicle_type, route) in enumerate(routes):
+        coords = [instance['warehouse'].coord]
+        
+        for customer_idx in route:
+            customer = instance['customers'][f'customer_{customer_idx}']
+            coords.append([customer.lat, customer.lon])
+        
+        coords.append(instance['warehouse'].coord)
+        
+        features.append({
+            "type": "Feature",
+            "properties": {
+                "vehicle": f"{vehicle_type.title()}-{idx+1}",
+                "vehicle_type": vehicle_type,
+                "capacity_used": sum(instance['customers'][f'customer_{c}'].weight for c in route),
+                "route_customers": route
+            },
+            "geometry": {
+                "type": "LineString",
+                "coordinates": coords
+            }
+        })
+    
+    return {
+        "type": "FeatureCollection",
+        "features": features,
+        "properties": {
+            "warehouse": instance['warehouse'].coord,
+            "optimization_date": str(np.datetime64('now'))
+        }
+    }
+
 def save_optimization_results(routes, instance, filename):
     """Save optimization results to JSON file"""
     results = {
@@ -334,8 +370,8 @@ def save_optimization_results(routes, instance, filename):
             route_coordinates.append(instance['warehouse'].coord)
         else:
             # Road-based coordinates for drivers
-            from .nsga3 import get_road_route_coordinates
-            route_coordinates = get_road_route_coordinates(instance, route, vehicle_type)oordinates_for_save(instance, route)
+            # Use the local function instead
+            route_coordinates = get_road_route_coordinates_for_save(instance, route)
 
         route_data = {
             'vehicle_id': f"{vehicle_type}_{i+1}",
